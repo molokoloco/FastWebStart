@@ -187,5 +187,6 @@ if ($thank) { ?>
 	</ul>
 </div>
 <div id="foxy">&nbsp;</div>
+<a href="https://github.com/molokoloco/FastWebStart/" title="See source code on GITHUB..." target="_blank"><img style="position:absolute;bottom:25px;left:0;border:0;z-index:999;" src="<?=$WWW;?>images/fork_me.png" width="90" height="90" alt="Fork me on GitHub"></a>
 </body>
 </html>
