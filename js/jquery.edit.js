@@ -97,6 +97,7 @@ var catEdit = function(event) {
 			var bValid = true;
 			allFields.removeClass('ui-state-error');
 			bValid = bValid && checkLength(title, 'Titre', 2, 25);
+			bValid = bValid && checkRegexp(title, /^([A-Za-z0-9_\- йилкащзофц])+$/i, 'Categorie name may consist of letters and numbers, underscores or dash');
 			if (bValid) {
 				if (action == 'add') { // Todo, add CAT
 					/*var liBefore = edCat.parent().prev();
@@ -152,21 +153,25 @@ var linkEdit = function(event) {
 			var bValid = true;
 			allFields.removeClass('ui-state-error');
 			bValid = bValid && checkLength(title, 'Titre', 2, 25);
-			//bValid = bValid && checkRegexp(title, /^[a-z]([0-9a-z_])+$/i,"Username may consist of a-z, 0-9, underscores, begin with a letter.");
+			//bValid = bValid && checkRegexp(title, /^([\w\- абвгдезийклмнопртуфхцщъыьэя])+$/i, 'Site name may consist of letters and numbers, underscores or dash');
 			bValid = bValid && checkLength(href, 'Lien', 12, 250);
 			// From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
 			bValid = bValid && checkRegexp(href, /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i, 'Ex. : &quot;http://www.site.com&quot;');
 			if (bValid) {
 				if (action == 'add') {
 					var liBefore = edLink.parent().prev();
-					var newLink = '<li class="sortLink"><a href="'+href.val()+'" rel="'+(result.val() || '')+'" title="'+(tips.val() || '')+'" class="l" style="cursor:move;">'+title.val()+'</a></li>';
+					var newLink = '<li class="sortLink"><a href="'+addslashes(input2html(href.val()))+'" rel="'+(result.val() ? addslashes(input2html(result.val())) : '')+'" title="'+(tips.val() ? addslashes(input2html(tips.val())) : '')+'" class="l" style="cursor:move;">'+input2html(title.val())+'</a></li>';
 					$(newLink).insertAfter(liBefore);
 					$('ul.sortUlLink').sortable('refresh');
 				}
 				else {
-					edLink.attr({href:href.val(), rel:(result.val() || ''), title:(tips.val() || '')});
-					edLink.html(title.val());
-				}
+					edLink.attr({
+						href:addslashes(input2html(href.val())), 
+						rel:(result.val() ? addslashes(input2html(result.val())) : ''), 
+						title:(tips.val() ? addslashes(input2html(tips.val())) : '')
+					});
+					edLink.html(input2html(title.val()));
+				}	
 				$(this).dialog('close');
 				initLinkEvent();
 				isEditedByUser();
@@ -194,8 +199,8 @@ var serializeLinks = function() { // UL>LI>A to JS object
 				href:addslashes(theLink.attr('href')),
 				result:addslashes(theLink.attr('rel')),
 				tips:addslashes(theLink.attr('title')),
-				title:addslashes(theLink.text())
-			};
+				title:addslashes(theLink.text()) // input2html()
+			};	
 		});
 		$(this).find('h3').each(function() { // UL CAT LI
 			SITESobj['title'] = $(this).text();
@@ -229,7 +234,7 @@ var saveSITES = function() { // JS object to String Data // Cf. ./js/sitesDatas.
 		type: 'POST',
 		url: 'index.php?action=update',
 		cache: false,
-		data: 'SITES='+escapeURI(SITESstring),
+		data: {SITES:SITESstring},
 		success: function(msg){ 
 			quitEditByUser();
 			quitEditMode();
@@ -311,7 +316,7 @@ var startEditMode = function(){
 	$('ul.sortUlLink').sortable({connectWith:'ul.sortUlLink', forcePlaceholderSize:true, placeholder:'placeHolder', items:'li:not(.sortLinkCat, .liAddLink)', change:isEditedByUser}).disableSelection();
 	$('li.sortLinkCat h3').css({cursor:'move'});
 	$('a.l').css({cursor:'move'});	
-
+	
 	setUlCol(false);
 	posItem();
 	initLinkEvent();
