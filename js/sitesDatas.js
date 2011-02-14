@@ -72,7 +72,7 @@ var SITES = [
 	{href:'http://fr.wikipedia.org', result:'http://fr.wikipedia.org/wiki/{R}', tips:'L\'encyclopédie libre', title:'Wikipédia'},
 	{href:'http://www.wolframalpha.com', result:'http://www.wolframalpha.com/input/?i={R}', tips:'Encyclopédie de connaissance systématique immédiatement calculable', title:'<strong>WolframAlpha</strong>'},
 	{href:'http://www.yahoo.com', result:'http://fr.search.yahoo.com/search?p={R}', tips:'Actualités, moteur de recherche, email gratuit, communautés', title:'Yahoo!'},
-	{href:'http://fr.yauba.com', result:'http://fr.yauba.com/?q={R}&amp;target=all', tips:'Moteur de recherche anonyme (Inde), fonctionnant en temps réel', title:'<strong>Yauba</strong>'}
+	{href:'http://www.yauba.com', result:'http://www.yauba.com/?q={R}&amp;target=all', tips:'Moteur de recherche anonyme (Inde), fonctionnant en temps réel', title:'<strong>Yauba</strong>'}
 	]}, {title: 'SOCIAL', data : [
 	{href:'http://www.badoo.com', result:'', tips:'C\'est le meilleur point de rencontre', title:'Badoo!'},
 	//{href:'http://brightkite.com', result:'', tips:'The simple way to keep up with friends &amp; places', title:'Brightkite'},
@@ -125,7 +125,7 @@ var SITES = [
 	{href:'http://www.johoo.tv', result:'http://www.johoo.tv/episodes.php?showname={R}', tips:'Watch your favorite TV Shows and Movies online', title:'Johoo'},
 	{href:'http://www.deviantart.com', result:'http://www.deviantart.com/#order=9&amp;q={R}', tips:'When Art meet Deviation', title:'DeviantART'},
 	{href:'http://www.flickr.com', result:'http://www.flickr.com/search/?q={R}', tips:'Partager vos photos. Explorer le monde', title:'FlickR'},
-	{href:'http://www.gettyimages.com/Home.aspx', result:'http://www.gettyimages.com/Search/Search.aspx?contractUrl=2&amp;assetType=image&amp;family=creative&amp;phrase={R}', tips:'We are the leading provider of digital media', title:'Getty'},
+	{href:'http://www.gettyimages.com', result:'http://www.gettyimages.com/Search/Search.aspx?contractUrl=2&amp;assetType=image&amp;family=creative&amp;phrase={R}', tips:'We are the leading provider of digital media', title:'Getty'},
 	{href:'http://customize.org/wallpapers', result:'http://customize.org/browse/power?sort_type=public_at&amp;sort_order=DESC&amp;search={R}', tips:'Des images qui peuvent être définies comme fond d\'écran', title:'WallPapers'},
 	]}, {title: 'ACTUS', data : [
 	{href:'http://www.20minutes.fr', result:'', tips:'20minutes.fr, information en continu', title:'<strong>20Minutes</strong>'},
