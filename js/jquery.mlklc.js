@@ -107,9 +107,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 			});
 		}
 		if (termsHtml == '') return;
-		$('div#searhTerms').html(termsHtml);
-		var lastSpan = $('div#searhTerms').find('span:last');
-		lastSpan.html(lastSpan.html().substr(0, (lastSpan.html().length - 2))); // remove last coma
+		$('div#searhTerms').html(termsHtml.substr(0, (termsHtml.length - 9)));
 	};
 	
 	// Add new search term in cookie

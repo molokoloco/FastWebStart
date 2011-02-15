@@ -30,8 +30,8 @@ select#searcher { width:21px; height:42px; margin:0 8px 0 0; padding:0; vertical
 @media screen and (-webkit-min-device-pixel-ratio:0) { select#searcher { width:18px; } }
 input#searcher option { width:616px; font-weight:normal; padding:1px 0 0 20px; }
 input#searcher optgroup { font-weight:normal; font-style:normal; padding: 2px 0 2px 5px; }
-input#q { margin:0; padding:0 0 2px 40px; font-size:25px; font-weight:bold; width:576px; height:38px; line-height:20px; vertical-align:top; border-radius:4px 0 0 4px; -moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px; }
-input#btnG { margin:0; padding:0 0 6px 0; font-size:22px; width:72px; height:42px; line-height:20px; border-radius:0 4px 4px 0; -moz-border-radius:0 4px 4px 0;border-radius:0 4px 4px 0; vertical-align:top; cursor:pointer; }
+input#q { margin:0; padding:0 0 2px 40px; font-size:25px; font-weight:bold; width:589px; height:38px; line-height:20px; vertical-align:top; border-radius:4px 0 0 4px; -moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px; }
+input#btnG { margin:0; padding:0 0 6px 0; font-size:22px; width:59px; height:42px; line-height:20px; border-radius:0 4px 4px 0; -moz-border-radius:0 4px 4px 0;border-radius:0 4px 4px 0; vertical-align:top; cursor:pointer; }
 input#clear { margin:0; padding:0 0 6px 0; font-size:15px; width:16px; height:42px; line-height:20px; border-radius:0; -moz-border-radius:0;border-radius:0; vertical-align:top; cursor:pointer;}
 img { border:0; }
 img.ico { vertical-align:middle; border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius:2px; }
