@@ -143,7 +143,8 @@
       if (this.disabled || !this.enabled) { return; }
       // return will exit the function
       // and event will not be prevented
-      switch (e.keyCode) {
+	  var key = e.which || e.keyCode;
+      switch (key) {
         case 27: //KEY_ESC:
           this.el.val(this.currentValue);
           this.hide();
@@ -155,7 +156,7 @@
             return;
           }
           this.select(this.selectedIndex);
-          if (e.keyCode === 9/* KEY_TAB */) { return; }
+          if (key === 9/* KEY_TAB */) { return; }
           break;
         case 38: //KEY_UP:
           this.moveUp();
@@ -172,7 +173,7 @@
 
     onKeyUp: function(e) {
       if(this.disabled){ return; }
-      switch (e.keyCode) {
+      switch (e.which || e.keyCode) {
         case 38: //KEY_UP:
         case 40: //KEY_DOWN:
           return;

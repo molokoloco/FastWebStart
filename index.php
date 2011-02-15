@@ -114,7 +114,7 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>GoogleBot (Fast Web Start)</title>
 	<meta http-equiv="Autor" content="^Work In Progress^ By molokoloco 2010"/>
-	<meta name="viewport" content="initial-scale=1.0;"/>
+	<meta name="viewport" content="width=600,initial-scale=1.0"/>
 	<link rel="icon" href="<?=$WWW;?>images/favicon.ico"/>
 	<link rel="shortcut icon" type="image/icon" href="<?=$WWW;?>favicon.ico"/>
 	<link rel="image_src" href="<?=$WWW;?>images/preview.png"/>
@@ -151,11 +151,15 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	<p>Bon surf !</p>
 	<p class="right"><a href="javascript:void(0);" onclick="$('div#info').fadeOut();">Fermer</a></p>
 </div>
+
 <div id="header">
 	<div class="right"><a href="#info" onclick="$('div#info').fadeIn();" title="Quelques explications sur les fonctionnalit&eacute;s de cette page" id="aide">Bienvenue</a> | <span id="editmode"></span><a href="#prefs" onclick="$('div#prefs').fadeIn();" id="preferences" title="Changer le style de la page">Pr&eacute;f&eacute;rences</a></div><div id="menu">&nbsp;<a href="#home" onclick="return $H.setDatas('home');" title="GoogleBot is Fast Web Start" class="bold" id="home">GoogleBot</a> | <a href="#code" onclick="return $H.setDatas('code');" title="CodeBot is Fast Coding Tools : http://code.b2bweb.fr" id="code">CodeBot</a> | <a href="#twitter" onclick="return $H.setDatas('twitter');" title="TwitterBot is Twitter Web Start : http://twitter.b2bweb.fr" id="twitter">TwitterBot</a><!-- | <a href="http://proxy.b2bweb.fr" title="Surf anonymously... (WorkInProgress)" id="proxy">ProxyBot</a>--></div>
 </div>
+
 <div id="footerBg">&nbsp;</div>
-<div id="footer"><p>By <a href="http://www.b2bweb.fr" title="Molokoloco @ Work Wild Web 2011">B2bweb.fr</a> | <a href="http://b2bweb.uservoice.com/forums/35888" target="_blank" title="Laisser une question, un commentaire, une idée... (avec uservoice.com)">FAQ</a> | <a href="http://www.google.com" title="Google suggest API">Google</a> &amp; <a href="http://www.veryrelated.com/" title="VeryRelated Mind Maps API">VeryRelated</a> | <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=molokoloco" title="Bookmark and Share with AddThis">Partager</a> | <span id="heure" title="Time is runnnnning...">88:88:88</span></p></div>
+<div id="footer">
+	<p>By <a href="http://www.b2bweb.fr" title="Molokoloco @ Work Wild Web 2011">B2bweb.fr</a> | <a href="http://b2bweb.uservoice.com/forums/35888" target="_blank" title="Laisser une question, un commentaire, une idée... (avec uservoice.com)">FAQ</a> | <a href="http://www.google.com" title="Google suggest API">Google</a> &amp; <a href="http://www.veryrelated.com/" title="VeryRelated Mind Maps API">VeryRelated</a> | <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=molokoloco" title="Bookmark and Share with AddThis">Partager</a> | <span id="heure" title="Time is runnnnning...">88:88:88</span></p>
+</div>
 
 <div id="SearchBot">
 	<div id="D1"><!-- Here the links data --></div>

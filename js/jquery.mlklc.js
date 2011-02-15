@@ -75,7 +75,7 @@ var db = function(x) { 'console' in window && console.log.call(console, argument
 
 // ------------------------------------ Here the page stuff... ------------------------------------ //
 
-var $H = {}; // GLOBAL SHARED OBJ
+var $H = {}; // GLOBAL SHARED OBJ (with edit.js)
 $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.fr/home/' : 'http://home.b2bweb.fr/' ); // Site ROOT url
 
 (function($, $H) {
@@ -103,7 +103,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 				if (!v) return;
 				var vPrint = input2html(v);
 				var vLink = addslashes(vPrint);
-				termsHtml += '<span id="term_'+(i)+'"><a href="javascript:void(0)" onclick="$(\'input#q\').val(\''+vLink+'\').focus();" class="lien2" title="Ajouter &agrave; la recherche">'+vPrint+'</a><a href="javascript:void(0)" onclick="removeStock(\''+v+'\', \''+i+'\');" title="Effacer">&#10006;</a>, </span>';
+				termsHtml += '<span id="term_'+(i)+'"><a href="javascript:void(0)" onclick="$(\'input#q\').val(\''+vLink+'\').focus();" class="lien2" title="Ajouter &agrave; la recherche">'+vPrint+'</a><a href="javascript:void(0)" onclick="$H.removeStock(\''+v+'\', \''+i+'\');" title="Effacer">&#10006;</a>, </span>';
 			});
 		}
 		if (termsHtml == '') return;
@@ -126,7 +126,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	};
 	
 	// Remove it search term in cookie
-	var removeStock = function(val, k) { 	
+	$H.removeStock = function(val, k) { 	
 		var terms = null;
 		if ((terms = $.cookie('search'))) {
 			terms = terms.split('##');
@@ -209,33 +209,34 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	};
 	
 	// First input#q letter hide sites without search fonction
-	var letterHide = function(e) {
+	var letterHide = function(event) {
 		if (!isAutocomplete) initAutocomplete();
 		target = 'input';
 		if ($inputQ.val() == '' && once) once = false; 
 		if (!once) {
-			if ($inputQ.val() != '') { once = true; $('.l').each(function() { if (!$(this).attr('rel')) $(this).fadeTo('slow', .2); }); }
-			else { $('.l').each(function() { if (!$(this).attr('rel')) $(this).fadeTo('slow', 1); }); }
+			if ($inputQ.val() != '') { once = true; $aLinks.each(function() { if (!$(this).attr('rel')) $(this).fadeTo('slow', .2); }); }
+			else { $aLinks.each(function() { if (!$(this).attr('rel')) $(this).fadeTo('slow', 1); }); }
 		}
 	};
 	
 	// Key Events HightLight Sites Names
-	var highLight = function(e) {
+	var highLight = function(event) {
+		var key = event.which || event.keyCode;
 		if (target == 'input' ) {
 			if ($inputQ.val().length >= 1 && one == 0) { // Stop hightlight ?
 				one = 1;
-				$('.l').each(function() { $(this).attr('class', 'l'); }); // Reset links
+				$aLinks.each(function() { $(this).attr('class', 'l'); }); // Reset links
 			}
 			else if ($inputQ.val().length < 1 && one == 1) one = 0; // Restart hightlight ?
 		}
 		if (one == 0) {
-			$('.l').each(function() {
-				if (event2key[(e.which || e.keyCode)] != '' && $(this).text().charAt(0).toLowerCase() == event2key[(e.which || e.keyCode)])
+			$aLinks.each(function() {
+				if (event2key[key] != '' && $(this).text().charAt(0).toLowerCase() == event2key[key])
 					$(this).attr('class', 'l hightlight');
 				else $(this).attr('class', 'l');
 			});
 		}
-		if (e.keyCode == 27) { // KEY_ESC
+		if (key == 27) { // KEY_ESC
 			$('div#info,div#prefs').hide();
 			if ($('div#divEdit').is(':visible')) $('div#divEdit').dialog('close');
 		}
@@ -273,14 +274,14 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 			if (searcher && /(home\.b2bweb\.fr)/.test(searcher)) window.document.location.href = 'http://fr.wiktionary.org/wiki/'.escape(getUrlVars()['q']);
 		$('select#searcher')[0].selectedIndex = 0; // FF don't keep default menu item
 		$inputQ.attr({autocomplete:'off'}); // Not valid for XHTML 1.0
-		$('form#f').bind('submit', function(e) {
+		$('form#f').bind('submit', function(event) {
 			var val = $inputQ.val();
 			addStock(val);
 		});
 	};
 	
 	// SearchBoOoot select
-	var searchBot = function(e) { 
+	var searchBot = function(event) { 
 		$('form#f').attr('action', 'http://www.google.fr/search'); // Re-Init form action
 		var searchVal = $('input#searcher option:selected').val();
 		if (searchVal == '') { $inputQ.val(''); return; }
@@ -373,11 +374,11 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	
 	// ====================== Outsided JS to edit LINKS and SITES =================================================================//
 	
-	// Double Autocomplete :)
+	// Rock & Roll double autocomplete...
 	var initAutocomplete = function() { 
 		isAutocomplete = true;
 		$inputQ.autocomplete({
-			suggestUrl:		$H.$H.WWW+'_google_suggest.php',
+			suggestUrl:		$H.WWW+'_google_suggest.php',
 			seedsUrl:		$H.WWW+'_veryrelated.php',
 			minChars:		1,
 			delimiter:		/(,|\+|-|AND)\s*/,
@@ -392,7 +393,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 		if (event) event.preventDefault();
 		editButton(false);
 		removeSitesLinkDefaultEvent();
-		if (typeof $E == 'undefined') {
+		if (!(typeof $E)) {
 			loadCss($H.WWW+'css/start/jquery-ui-1.8.custom.css');
 			getScript($H.WWW+'js/jquery-ui-1.8.sortableDialog.min.js');
 			getScript($H.WWW+'js/jquery.edit.min.js', function() { $E.startEditMode(); });
@@ -441,6 +442,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 				$('#D2').html('<ul id="L2" class="sortUlCat">'+tplTdSites+'</ul>');
 			}
 		}
+		$aLinks = $('a.l');
 	};
 	
 	// Select a random link - click this, I know you want ;p

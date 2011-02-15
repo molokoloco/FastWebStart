@@ -156,7 +156,7 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 		}
 		var formButtons = {};
 		$.extend(formButtons, {'Annuler': function() { $(this).dialog('close'); } });
-		if (action != 'add') $.extend(formButtons, {'Supprimer': function() { $(this).dialog('close'); edLink.parent().remove(); } });
+		if (action != 'add') $.extend(formButtons, {'Supprimer': function() { $(this).dialog('close'); edLink.parent().remove(); initLinkEvent(); isEditedByUser(); } });
 		$.extend(formButtons, {
 			'Valider': function() {
 				var bValid = true;
