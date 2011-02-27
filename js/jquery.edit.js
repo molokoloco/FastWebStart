@@ -8,11 +8,11 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 (function($, $E){
 		  
 	// VARS //////////////////////////////////////////////
-	var title, href, result, tips, allFields, tipsError;
-	var editedByUser = false;
-	var action = 'edit'; // edit/add
-	var edLink = '';
-	var edCat = '';
+	var title, href, result, tips, allFields, tipsError,
+		editedByUser = false,
+		action = 'edit', // edit/add
+		edLink = '',
+		edCat = '';
 	
 	// FORM DIALOG //////////////////////////////////////////////
 	var updateTips = function(t) {
@@ -223,7 +223,7 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 		return SITEStmp;
 	};
 	
-	var saveSITES = function() { // JS object to String Data // Cf. ./js/sitesDatas.js
+	$E.saveSITES = function() { // JS object to String Data // Cf. ./js/sitesDatas.js
 		SITES = serializeLinks();
 		var SITESstring = "var SITES = [";
 		for (var CAT in SITES) {
@@ -308,7 +308,7 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 		$E.quitEditByUser();
 		// Set helper
 		if ($('div#divEditInfos').length == 0) {
-			var tpl = '<div id="divEditInfos"><h3 style="display:inline;">Mode &eacute;dition : </h3><span id="infoTexte"><strong>Cliquez</strong> sur les liens ou les cat&eacute;gories pour les d&eacute;placer, <strong>double-cliquez</strong> pour les &eacute;diter</span> <button type="button" id="Sauvegarder" onclick="saveSITES();" title="Enregistrer les liens et le th&egrave;me de cette page (Connexion obligatoire avec Facebook)" style="display:none;">Sauvegarder</button> <button type="button" id="Annuler" onclick="$E.quitEditByUser();$E.quitEditMode();" title="Annuler les modifications" style="display:none;">Annuler</button></div>';
+			var tpl = '<div id="divEditInfos"><h3 style="display:inline;">Mode &eacute;dition : </h3><span id="infoTexte"><strong>Cliquez</strong> sur les liens ou les cat&eacute;gories pour les d&eacute;placer, <strong>double-cliquez</strong> pour les &eacute;diter</span> <button type="button" id="Sauvegarder" onclick="$E.saveSITES();" title="Enregistrer les liens et le th&egrave;me de cette page (Connexion obligatoire avec Facebook)" style="display:none;">Sauvegarder</button> <button type="button" id="Annuler" onclick="$E.quitEditByUser();$E.quitEditMode();" title="Annuler les modifications" style="display:none;">Annuler</button></div>';
 			$('body').append(tpl);
 		}
 		else $('div#divEditInfos').show();

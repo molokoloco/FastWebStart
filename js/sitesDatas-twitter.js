@@ -17,6 +17,7 @@ var SITES = [
 	{href:'http://www.backtype.com', result:'http://www.backtype.com/search?q={R}', tips:'Recherche en temps réel de conversation', title:'BackType'},
 	]}, {title: 'AROUND YOU', data : [
 	{href:'http://www.isparade.jp', result:'', tips:'Let\'s parade with people', title:'IsParade'},
+	{href:'http://apps.asterisq.com/mentionmap/', result:'http://apps.asterisq.com/mentionmap/#user-{R}', tips:'You\'re looking at a map of mentions', title:'MentionMap'},
 	{href:'http://beta.twittervision.com', result:'', tips:'Twitts WorlMap', title:'TwitterVision'},
 	{href:'http://www.twittearth.com', result:'', tips:'Twitts in a 3D WorlMap', title:'TwittEarth'},
 	{href:'http://www.geochirp.com', result:'', tips:'Geo Twitts around you', title:'GeoChirp'},

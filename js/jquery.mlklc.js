@@ -31,7 +31,7 @@
                 if (stylePath == $(this).attr('href')) { $(this).removeAttr('disabled'); exist = true; }
                 else disabled.push(this);
             });
-            if (exist == false) $('head').append('<link rel="stylesheet" type="text/css" href="'+stylePath+'" id="theme'+Math.random()+'"/>');
+            if (exist === false) $('head').append('<link rel="stylesheet" type="text/css" href="'+stylePath+'" id="theme'+Math.random()+'"/>');
             setTimeout(function () { $(disabled).each(function () { $(this).attr('disabled', 'disabled'); }); }, 900);
             if ($.cookie) $.cookie('css', stylePath, {expires: 365, path: '/'});
         },
@@ -39,7 +39,7 @@
             if ($.cookie && $.cookie('css')) {
                 var isSet = false;
                 $('link[rel*=style][id]').each(function () { if ($.cookie('css') == $(this).attr('href')) isSet = true; });
-                if (isSet == false) $.fn.styleSwitch($.cookie('css'));
+                if (isSet === false) $.fn.styleSwitch($.cookie('css'));
             }
             return $(this).click(function (event) {
                 event.preventDefault();
@@ -75,19 +75,24 @@ var db = function(x) { 'console' in window && console.log.call(console, argument
 
 // ------------------------------------ Here the page stuff... ------------------------------------ //
 
-var $H = {}; // GLOBAL SHARED OBJ (with edit.js)
+var $H = new Object(); // GLOBAL SHARED OBJ (with edit.js)
 $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.fr/home/' : 'http://home.b2bweb.fr/' ); // Site ROOT url
+
+var gtv = gtv || {
+  jq: {}
+};
 
 (function($, $H) {
 	
 	// ====================== Somes vars =================================================================//
 
-	var W = 800, H = 600, docW = 800, docH = 600, foxAnim = true, toStock = true, startAnime = true, once = false, expressionFilled = false, intr = null, coef = 0, dist = 0, count = 0, o = 0, y = 0, one = 0, target = 'input', isAutocomplete = false;
+	var W = 800, H = 600, docW = 800, docH = 600, foxAnim = true, toStock = true, startAnime = true, once = false, expressionFilled = false, intr = null, coef = 0, dist = 0, count = 0, o = 0, y = 0, one = 0, target = 'page', isAutocomplete = false, tabIndex = 3, currentLinkEnter = null;
+		// Tabindex (for links) == 3 > search input, erase, valid (1,2,3)
 	
-	// Main elements... (others are badly mixed in code...)
-	var $inputQ = $('input#q'), // Main input for searches
-		$aLinks = $('a.l'), // Les liens magiques
-		$foxy = $('div#foxy'); // Le truc qui bouge
+	// Main elements... (others are badly mixed in code...) this are setted in DOM init...
+	var $inputQ = null, // Main input for searches
+		$aLinks = null, // Les liens magiques
+		$foxy = null; // Le truc qui bouge
 	
 	// ====================== STOCK SEARCH in cookie =================================================================//
 	
@@ -185,31 +190,59 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	var clock = function() { var dt = new Date(); $('span#heure').html(pad(dt.getHours())+':'+pad(dt.getMinutes())+':'+pad(dt.getSeconds())); };
 	var timer = function() { setInterval(clock, 1000); };
 	
-	// ====================== EVENTS actions =================================================================//
+	// Fade in intro..
+	/*var createFrame = function(e) {
+		$linkFocus = $(e.target);
+		var top = (e.pageX > (H / 2) ? 100 : (H / 2) );
+		var left = (e.pageW > (W / 2) ? 100 : (W / 2) );
+		$('<div />')
+			.attr({id:'overlay'}).css({top:e.pageY, left:e.pageX, width:((W/2)-100)+'px', height:((H/2)-100)+'px'})
+			//.html('<h1>Message...</h1><p>'+message+'</p>')
+			.appendTo('body')//.hide().fadeIn(200)
+			.delay(5000).fadeOut(400, function(){ $(this).remove(); });
+	};*/
+	
+	// ====================== EVENTS ACTIONS =================================================================//
 	
 	// Smart focus input
-	var inputFocus = 	function() { $inputQ.toggleClass('classQfocus', true); },
+	var inputFocus = 	function() { $inputQ.toggleClass('classQfocus', true); target = 'input'; },
 		inputSetFocus = function() { $inputQ.focus(); },
-		inputBlur = 	function() { $inputQ.toggleClass('classQfocus', false); },
+		inputBlur = 	function() { $inputQ.toggleClass('classQfocus', false); target = 'page'; },
 		inputSetBlur = 	function() { if ($inputQ.val() == '') $inputQ.blur(); };
+	
+	/*var mouseEnterLinkTimer = null;
+	var timerLinkOpenFrame = function(e) {
+		if (!currentLinkEnter) return;
+		createFrame(e);
+	};*/
+	
+	var mouseEnterLink = function(event) {
+		inputSetBlur();
+		/*$linkFocus = $(event.target);
+		currentLinkEnter = $linkFocus.attr('tabIndex');
+		if (mouseEnterLinkTimer) clearTimeout(mouseEnterLinkTimer);
+		mouseEnterLinkTimer = setTimeout(timerLinkOpenFrame, 1200, event);*/
+	};
+	
+	var mouseLeaveLink = function(event) {
+		/*currentLinkEnter = null;*/
+	};
 	
 	// Catch and AutoFill clicked link if we got search value ?
 	var autoFill = function(event){
-		target = 'page';
-		one = 0;
-		$(this).blur();
+		//$(this).blur();
 		if ($inputQ.val() != '' && $(this).attr('rel') && $(this).attr('rel').indexOf('{R}') != -1) {
 			var val = $inputQ.val();
 			addStock(val);
 			val = escapeURI(val);
 			return !window.open($(this).attr('rel').replace(/{R}/g, val));
 		}
+		return true;
 	};
 	
 	// First input#q letter hide sites without search fonction
 	var letterHide = function(event) {
 		if (!isAutocomplete) initAutocomplete();
-		target = 'input';
 		if ($inputQ.val() == '' && once) once = false; 
 		if (!once) {
 			if ($inputQ.val() != '') { once = true; $aLinks.each(function() { if (!$(this).attr('rel')) $(this).fadeTo('slow', .2); }); }
@@ -220,23 +253,20 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	// Key Events HightLight Sites Names
 	var highLight = function(event) {
 		var key = event.which || event.keyCode;
-		if (target == 'input' ) {
-			if ($inputQ.val().length >= 1 && one == 0) { // Stop hightlight ?
-				one = 1;
-				$aLinks.each(function() { $(this).attr('class', 'l'); }); // Reset links
-			}
-			else if ($inputQ.val().length < 1 && one == 1) one = 0; // Restart hightlight ?
+		if (key == 27) { // KEY_ESC can came here...
+			$('div#info,div#prefs').hide();
+			if ($('div#divEdit').is(':visible')) $('div#divEdit').dialog('close');
 		}
-		if (one == 0) {
+		if (target == 'input' && $inputQ.val().length >= 1) { // Don't highlight when typing search
+			$aLinks.each(function() { $(this).attr('class', 'l'); }); // Reset links
+		}
+		else {
+			if (!event2key[key]) return;
 			$aLinks.each(function() {
-				if (event2key[key] != '' && $(this).text().charAt(0).toLowerCase() == event2key[key])
+				if (event2key[key] != '' && $(this).text().charAt(0).toLowerCase() == event2key[key]) // First letter equal key
 					$(this).attr('class', 'l hightlight');
 				else $(this).attr('class', 'l');
 			});
-		}
-		if (key == 27) { // KEY_ESC
-			$('div#info,div#prefs').hide();
-			if ($('div#divEdit').is(':visible')) $('div#divEdit').dialog('close');
 		}
 	};
 	
@@ -246,22 +276,28 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 		if (!$(event.target).is('a#aide') && !$(this).parents().is('div#info')) $('div#info').hide();
 	};
 	
-	// ====================== EVENTS managers =================================================================//
+	// ====================== EVENTS LISTENER =================================================================//
 
-	// Gestion des listeners... garbage colector..
-	var removeSitesLinkDefaultEvent = function() {
-		$aLinks.unbind('click', autoFill).unbind('mouseenter', inputSetBlur);
-		$inputQ.unbind('keyup', letterHide).unbind('mouseenter', inputSetFocus).unbind('focus', inputFocus).unbind('blur', inputBlur);
-		$('select#searcher').unbind('change', searchBot);
-		$(document).unbind('keypress', highLight);
-	};
-	
 	// Gestion des listeners...
-	var initSitesLinkDefaultEvent = function() {
-		$aLinks.live('click', autoFill).live('mouseenter', inputSetBlur);
+	var initSitesLinksEvents = function() {
+		$aLinks.bind('click', autoFill).bind('mouseenter', mouseEnterLink).bind('mouseleave', mouseLeaveLink);
 		$inputQ.bind('keyup', letterHide).bind('mouseenter', inputSetFocus).bind('focus', inputFocus).bind('blur', inputBlur);
 		$('select#searcher').bind('change', searchBot);
 		$(document).bind('keypress', highLight);
+
+		// Initialize jQuery keyboard navigation // http://www.amountaintop.com/projects/keynav/
+		$('div#SearchBot a.l').keynav();
+	};
+	
+	// Gestion des listeners... garbage colector..
+	var removeSitesLinksEvents = function() {
+		$aLinks.unbind('click', autoFill).unbind('mouseenter', mouseEnterLink).unbind('mouseleave', mouseLeaveLink);
+		$inputQ.unbind('keyup', letterHide).unbind('mouseenter', inputSetFocus).unbind('focus', inputFocus).unbind('blur', inputBlur);
+		$('select#searcher').unbind('change', searchBot);
+		$(document).unbind('keypress', highLight);
+		
+		// Reset jQuery keyboard navigation
+		$().keynavReset();
 	};
 	
 	// ====================== Enhanced SEARCH INPUT =================================================================//
@@ -390,11 +426,11 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	$H.editSites = function(event){
 		if (event) event.preventDefault();
 		editButton(false);
-		removeSitesLinkDefaultEvent();
-		if (!(typeof $E)) {
+		removeSitesLinksEvents();
+		if (typeof $E == 'undefined') {
 			loadCss($H.WWW+'css/start/jquery-ui-1.8.custom.css');
 			getScript($H.WWW+'js/jquery-ui-1.8.sortableDialog.min.js');
-			getScript($H.WWW+'js/jquery.edit.min.js', function() { $E.startEditMode(); });
+			getScript($H.WWW+'js/jquery.edit.js', function() { $E.startEditMode(); }); //.min
 		}
 		else $E.startEditMode();
 		return false;
@@ -406,6 +442,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 	
 	// FRONT // Overwrite SITES datas var with new one...
 	$H.setDatas = function(type) { 
+		removeSitesLinksEvents(); // When rebuilding data, delete previous listenners
 		var jsSrc = 'js/sitesDatas.js.php';
 		switch(type) {
 			case 'code' : jsSrc = 'js/sitesDatas-code.js'; break;
@@ -428,7 +465,7 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 			for (var site in SITES[CAT]['data']) {
 				var siteObj = SITES[CAT]['data'][site];
 				if (siteObj['href'] && siteObj['title'])
-					tplTdSitesSite += '<li class="sortLink"><a href="'+siteObj['href']+'" rel="'+(siteObj['result'] || '')+'" title="'+(siteObj['tips'] || '')+'" class="l">'+siteObj['title']+'</a></li>'; // LINKS
+					tplTdSitesSite += '<li class="sortLink"><a href="'+siteObj['href']+'" rel="'+(siteObj['result'] || '')+'" title="'+(siteObj['tips'] || '')+'" class="l" tabindex="'+(tabIndex++)+'">'+siteObj['title']+'</a></li>'; // LINKS
 			}
 			if ((parseInt(CAT)+1) <= numCatMed) tplTdSites += '<li><ul class="sortUlLink">'+tplTdSitesSite+tplTdCat+'</ul></li>';
 			else tplTdSites += '<li><ul class="sortUlLink">'+tplTdCat+tplTdSitesSite+'</ul></li>';
@@ -455,16 +492,22 @@ $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.
 		$H.setUlCol(true);
 		$H.posItem();
 		rdmSites();
-		initSitesLinkDefaultEvent();
+		initSitesLinksEvents();
 	};
 	
 	// ====================== Ok, let's go ! =================================================================//
 	
 	$(document).ready(function() {
+		// Main elements... (others are badly mixed in code...)
+		$inputQ = $('input#q'); // Main input for searches
+		$aLinks = $('a.l'); // Les liens magiques
+		$foxy = $('div#foxy'); // Le truc qui bouge
+		
 		W = $(window).width(); H = $(window).height(); docW = $(document).width(); docH = $(document).height();	
-		overlay(700);
-		$('a.css').styleInit(); // Load CSS
-		highlightMenu(); // set menu bar items
+		overlay(500);
+		$('div#SearchBot').show();
+		$('a.css').styleInit(); // Load cookie CSS and manage switch
+		highlightMenu(); // Set menu bar items
 		searchInit(); // Search Form scripting
 		if ($.cookie('foxy')) foxAnim = ($.cookie('foxy') == 'yes' ? true : false);
 		$(document).mousemove(focusSearch);

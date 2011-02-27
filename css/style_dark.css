@@ -1,14 +1,21 @@
 /* -------------------------------------- MESH -------------------------------------------- */
+@font-face {
+  font-family: 'Geo';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Geo'), local('Geo-Regular'), url('./Geo-Regular.ttf') format('truetype');
+}
+
 /* Body And Font */
 body { width:100%; height:100%; margin:0; padding:0; }
-body, p, td, div, a { font:12px/16px Arial, Verdana, Helvetica, sans-serif; }
-h3 { font-size:12px; font-weight:bold; margin:4px 0; padding:0; text-transform:uppercase; }
+body, p, td, div, a { font:13px/105% 'Geo', 'Tahoma', Verdana, Helvetica, sans-serif; }
+h3 { font-size:16px; font-weight:bold; margin:4px 0; padding:0; text-transform:uppercase; }
 a, a:visited, a:active { text-decoration:none; }	
 a.l, a.l:visited, a.l:active { display:block; padding:0 2px 1px 3px; -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; }
 a.lsmall, a.lsmall:visited, a.lsmall:active { font:10px/12px Arial, Verdana, Helvetica, sans-serif; }
 p { margin:0; padding:0; }
-div#footer p, div#footer p a { font:9px Verdana, Helvetica; }
-.lien2, a.lien2 { font-size:11px; }
+div#footer p, div#footer p a { font:9px/9px Arial, Verdana, Helvetica, sans-serif; }
+.lien2, a.lien2 { font:11px/11px Arial, Verdana, Helvetica, sans-serif; }
 .blockRow { opacity:.4; -webkit-transition: all 1s ease-in-out; -moz-transition: all 1s ease-in-out; -o-transition: all 1s ease-in-out; }
 .blockRow:hover { opacity:1; }
 .close, a.close { font-size:11px; float:right; }
@@ -64,17 +71,18 @@ div#overlay { top:0; left:0; width:100%; height:100%; background:#FFFFFF; positi
 
 /* -------------------------------------- COLORS -------------------------------------------- */
 /* BACKGROUND */
-body, #searchBox { background:#000000 url(../images/bg_big_black.png) repeat-x scroll left top; }
-#searchBox { background-position: 0 -150px; }
+body { background:#111111; }
+#searchBox, #btnG, input#clear { background: #4c4c4c; background: -moz-linear-gradient(top, #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(12%,#595959), color-stop(25%,#666666), color-stop(39%,#474747), color-stop(50%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(76%,#2b2b2b), color-stop(91%,#1c1c1c), color-stop(100%,#131313)); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); }
 #footer { background: url(../images/bg_center_black.png) repeat-x left top; }
 #q { background:#FFFFFF url(data:image/png;base64,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%3D%3D) no-repeat scroll 3px 3px; }
-#tooltip, #info, #prefs, #divEditInfos, #btnG, input#clear { background:#666666; background-image:-moz-linear-gradient(center top , #333333 0%, #282828 40%, #5A5A5A 70%, #1E1E1E 94%); background-image:-webkit-gradient(linear,  left bottom, left top, color-stop(0, #333333), color-stop(0.4, #282828), color-stop(0.7, #5A5A5A), color-stop(0.94, #1E1E1E)); }	
+#tooltip, #info, #prefs, #divEditInfos { background:#666666; background-image:-moz-linear-gradient(center top , #333333 0%, #282828 40%, #5A5A5A 70%, #1E1E1E 94%); background-image:-webkit-gradient(linear,  left bottom, left top, color-stop(0, #333333), color-stop(0.4, #282828), color-stop(0.7, #5A5A5A), color-stop(0.94, #1E1E1E)); }	
 select#searcher { background:none; }
 a.l:hover { background:#74ACFF; }
 
 /* TEXT */
-body, p, td, div, #searcher, #tooltip, #info, #prefs, #divEditInfos, #header div, #header div a { color:#999999; }
-a, a.l:hover, a.l, a.l:visited, a.hightlight, #btnG, input#clear { color:#C4C4C4; }
+body, p, td, div, #searcher, #tooltip, #info, #prefs, #divEditInfos, #header div, #header div a { color:#E7D80C; }
+a, a.l:hover, a.l, a.l:visited, a.hightlight, #btnG, input#clear { color:#D4D4D4; }
 a:hover, #header div a:hover, #footer div a:hover, #footer div a:hover, a:active, a.l:active, a.lien2:hover, .hightlight:first-letter, a.hightlight:first-letter, a.hightlight2, a.hightlight2:visited, #searcher option, #divEditInfos h3 { color:#74ACFF; }
 a:first-letter {} /*for FF */
 #footer div, #footer div a, #q, input, td.gac_c, #formEdit label, input#clear  {color:#666666; }
@@ -95,9 +103,9 @@ a.l, a.l:visited, a.l:active, #q { text-shadow:#000000 1px 1px 1px; }
 div.shadow, div.shadow a { text-shadow:#000000 0px 0px 1px; }
 div.shadow a:hover { text-shadow:#74ACFF 0px 0px 1px; }
 #btnG, input#clear { text-shadow:#354D6F 1px 1px 5px; }
-body, #q { -moz-box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); -webkit-box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); }
-#btnG, input#clear  { -moz-box-shadow: 3px 3px 4px rgba(120,120,120,0.6); -webkit-box-shadow: 3px 3px 4px rgba(120,120,120,0.6); box-shadow: 3px 3px 4px rgba(120,120,120,0.6); }
-#searchBox, #tooltip, /*#divEdit,*/ #info, #prefs, .autocomplete  { -moz-box-shadow: 3px 3px 16px rgba(120,120,120,0.6); -webkit-box-shadow: 3px 3px 16px rgba(120,120,120,0.6); box-shadow: 3px 3px 16px rgba(120,120,120,0.6); }
+body { -moz-box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); -webkit-box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); box-shadow: inset 3px 3px 4px rgba(120,120,120,0.8); }
+#q, #btnG, input#clear, #searchBox  { -moz-box-shadow: 3px 3px 4px rgba(120,120,120,0.6); -webkit-box-shadow: 3px 3px 4px rgba(120,120,120,0.6); box-shadow: 3px 3px 4px rgba(120,120,120,0.6); }
+#tooltip, /*#divEdit,*/ #info, #prefs, .autocomplete  { -moz-box-shadow: 3px 3px 16px rgba(120,120,120,0.6); -webkit-box-shadow: 3px 3px 16px rgba(120,120,120,0.6); box-shadow: 3px 3px 16px rgba(120,120,120,0.6); }
 
 /* -------------------------------------- JS autocomplete -------------------------------------------- */
 .autocomplete-w1 { position:absolute; top:0px; left:0px; margin:0; padding:2px 0 0 0;  -moz-opacity : 0.85; filter : alpha(opacity=85); opacity : 0.85;  }
