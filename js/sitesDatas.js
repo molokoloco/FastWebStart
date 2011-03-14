@@ -9,6 +9,7 @@ var SITES = [
 	{href:'http://translate.google.fr/', result:'http://translate.google.fr/translate_t?hl=fr&amp;q={R}', tips:'Permet de traduire instantanément du texte et des pages Web', title:'Traductions'},
 	{href:'http://video.google.fr', result:'http://video.google.fr/videosearch?hl=fr&amp;q={R}', tips:'Moteur de recherche de vidéos', title:'Vidéos'}
 	]}, {title: 'SOCIAL', data : [
+	{href:'https://www.google.com/accounts/ManageAccount', result:'', tips:'Gestion du profil Google', title:'<strong>Compte</strong>'},
 	{href:'http://www.google.com/calendar', result:'', tips:'L\'agenda en ligne de Google', title:'<strong>Agenda</strong>'},
 	{href:'http://www.google.com/contacts', result:'', tips:'Vos contacts googles (Gmail, Docs, ...)', title:'Contacts'},
 	{href:'http://mail.google.com/mail', result:'https://mail.google.com/mail/?#search/{R}', tips:'Gmail: Email by Google', title:'<strong>Gmail</strong>'},
@@ -40,7 +41,8 @@ var SITES = [
 	{href:'http://groups.google.fr', result:'http://groups.google.fr/groups?q={R}', tips:'Service de groupe de discussion (Email, Usenet)', title:'Groupes'},
 	{href:'http://www.googlelabs.com/', result:'http://www.googlelabs.com/?q={R}&amp;apps=Search+Labs', tips:'Testez toutes les experiences des Google Labs en ligne', title:'GoogleLabs'},
 	{href:'http://www.google.com/ig', result:'', tips:'iGoogle est votre page Google personnalisée', title:'iGoogle'},
-	{href:'http://www.google.com/s2/search/social', result:'', tips:'Social Search', title:'Social'}
+	{href:'http://www.google.com/s2/search/social', result:'', tips:'Social Search', title:'Social'},
+	{href:'http://market.android.com', result:'https://market.android.com/search?q={R}&c=apps', tips:'Android Apps Market', title:'MarketAndroid'},
 	]}, {title: 'THEMES', data : [
 	{href:'http://blogsearch.google.fr', result:'http://blogsearch.google.fr/blogsearch?hl=fr&amp;q={R}', tips:'Recherche spécifique dans les blog', title:'<strong>Blogs</strong>'},
 	{href:'http://code.google.com', result:'ttp://code.google.com/intl/fr-FR/search/#q={R}', tips:'Google Project Hosting', title:'<strong>Code</strong>'},

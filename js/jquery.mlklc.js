@@ -78,10 +78,6 @@ var db = function(x) { 'console' in window && console.log.call(console, argument
 var $H = new Object(); // GLOBAL SHARED OBJ (with edit.js)
 $H.WWW = ( /localhost\//.test(document.location) ? 'http://localhost/www.b2bweb.fr/home/' : 'http://home.b2bweb.fr/' ); // Site ROOT url
 
-var gtv = gtv || {
-  jq: {}
-};
-
 (function($, $H) {
 	
 	// ====================== Somes vars =================================================================//
@@ -284,9 +280,7 @@ var gtv = gtv || {
 		$inputQ.bind('keyup', letterHide).bind('mouseenter', inputSetFocus).bind('focus', inputFocus).bind('blur', inputBlur);
 		$('select#searcher').bind('change', searchBot);
 		$(document).bind('keypress', highLight);
-
-		// Initialize jQuery keyboard navigation // http://www.amountaintop.com/projects/keynav/
-		$('div#SearchBot a.l').keynav();
+		$('div#SearchBot a.l').keynav(); // Initialize jQuery keyboard navigation // http://mike-hostetler.com/jquery-keyboard-navigation-plugin
 	};
 	
 	// Gestion des listeners... garbage colector..
@@ -295,9 +289,7 @@ var gtv = gtv || {
 		$inputQ.unbind('keyup', letterHide).unbind('mouseenter', inputSetFocus).unbind('focus', inputFocus).unbind('blur', inputBlur);
 		$('select#searcher').unbind('change', searchBot);
 		$(document).unbind('keypress', highLight);
-		
-		// Reset jQuery keyboard navigation
-		$().keynavReset();
+		$().keynavReset(); // Reset jQuery keyboard navigation
 	};
 	
 	// ====================== Enhanced SEARCH INPUT =================================================================//
@@ -427,7 +419,7 @@ var gtv = gtv || {
 		if (event) event.preventDefault();
 		editButton(false);
 		removeSitesLinksEvents();
-		if (typeof $E == 'undefined') {
+		if (typeof($E) == 'undefined') {
 			loadCss($H.WWW+'css/start/jquery-ui-1.8.custom.css');
 			getScript($H.WWW+'js/jquery-ui-1.8.sortableDialog.min.js');
 			getScript($H.WWW+'js/jquery.edit.js', function() { $E.startEditMode(); }); //.min

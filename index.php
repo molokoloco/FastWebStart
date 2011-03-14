@@ -125,6 +125,9 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	<script type="text/javascript" src="<?=$WWW;?>js/jquery.mlklc.min.js"></script>
 </head>
 <body>
+	<div id="header">
+		<div class="right"><a href="#info" onClick="$('div#info').fadeIn();" title="Quelques explications sur les fonctionnalit&eacute;s de cette page" id="aide">Bienvenue</a> | <span id="editmode"></span><a href="#prefs" onClick="$('div#prefs').fadeIn();" id="preferences" title="Changer le style de la page">Pr&eacute;f&eacute;rences</a></div><div id="menu">&nbsp;<a href="#home" onClick="return $H.setDatas('home');" title="GoogleBot is Fast Web Start" class="bold" id="home">GoogleBot</a> | <a href="#code" onClick="return $H.setDatas('code');" title="CodeBot is Fast Coding Tools : http://code.b2bweb.fr" id="code">CodeBot</a> | <a href="#twitter" onClick="return $H.setDatas('twitter');" title="TwitterBot is Twitter Web Start : http://twitter.b2bweb.fr" id="twitter">TwitterBot</a><!-- | <a href="http://proxy.b2bweb.fr" title="Surf anonymously... (WorkInProgress)" id="proxy">ProxyBot</a>--></div>
+	</div>
 	<div id="info" style="display:none;">
 		<h3>Welcome :)</h3>
 		<p>Bienvenue sur GoogleBot !<br />
@@ -152,13 +155,6 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 		<p>Bon surf !</p>
 		<p class="right"><a href="javascript:void(0);" onClick="$('div#info').fadeOut();">Fermer</a></p>
 	</div>
-	<div id="header">
-		<div class="right"><a href="#info" onClick="$('div#info').fadeIn();" title="Quelques explications sur les fonctionnalit&eacute;s de cette page" id="aide">Bienvenue</a> | <span id="editmode"></span><a href="#prefs" onClick="$('div#prefs').fadeIn();" id="preferences" title="Changer le style de la page">Pr&eacute;f&eacute;rences</a></div><div id="menu">&nbsp;<a href="#home" onClick="return $H.setDatas('home');" title="GoogleBot is Fast Web Start" class="bold" id="home">GoogleBot</a> | <a href="#code" onClick="return $H.setDatas('code');" title="CodeBot is Fast Coding Tools : http://code.b2bweb.fr" id="code">CodeBot</a> | <a href="#twitter" onClick="return $H.setDatas('twitter');" title="TwitterBot is Twitter Web Start : http://twitter.b2bweb.fr" id="twitter">TwitterBot</a><!-- | <a href="http://proxy.b2bweb.fr" title="Surf anonymously... (WorkInProgress)" id="proxy">ProxyBot</a>--></div>
-	</div>	
-	<div id="footerBg">&nbsp;</div>
-	<div id="footer">
-		<p>By <a href="http://www.b2bweb.fr" title="Molokoloco @ Work Wild Web 2011">B2bweb.fr</a> | <a href="http://b2bweb.uservoice.com/forums/35888" target="_blank" title="Laisser une question, un commentaire, une idée... (avec uservoice.com)">FAQ</a> | <a href="http://www.google.com" title="Google suggest API">Google</a> &amp; <a href="http://www.veryrelated.com/" title="VeryRelated Mind Maps API">VeryRelated</a> | <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=molokoloco" title="Bookmark and Share with AddThis">Partager</a> | <span id="heure" title="Time is runnnnning...">88:88:88</span></p>
-	</div>
 	<div id="SearchBot" style="display:none;">
 		<div id="D1"><!-- Here the links data --></div>
 		<div class="blockRow" style="margin:0px;"></div>
@@ -185,5 +181,9 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	</div>
 	<div id="foxy">&nbsp;</div>
 	<a href="https://github.com/molokoloco/FastWebStart/" title="See source code on GITHUB..." target="_blank" id="git">GIT</a>
+	<div id="footerBg">&nbsp;</div>
+	<div id="footer">
+		<p>By <a href="http://www.b2bweb.fr" title="Molokoloco @ Work Wild Web 2011">B2bweb.fr</a> | <a href="http://b2bweb.uservoice.com/forums/35888" target="_blank" title="Laisser une question, un commentaire, une idée... (avec uservoice.com)">FAQ</a> | <a href="http://www.google.com" title="Google suggest API">Google</a> &amp; <a href="http://www.veryrelated.com/" title="VeryRelated Mind Maps API">VeryRelated</a> | <a href="http://www.addthis.com/bookmark.php?v=250&amp;username=molokoloco" title="Bookmark and Share with AddThis">Partager</a> | <span id="heure" title="Time is runnnnning...">88:88:88</span></p>
+	</div>
 </body>
 </html>
