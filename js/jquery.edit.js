@@ -5,7 +5,7 @@
 
 var $E = $E || {}; // GLOBAL SHARED OBJ
 
-(function($, $E){
+$(function(){
 		  
 	// VARS //////////////////////////////////////////////
 	var title, href, result, tips, allFields, tipsError,
@@ -241,9 +241,9 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 		
 		$.ajax({ // Let's write that (with PHP) !
 			type: 'POST',
-			url: 'index.php?action=update',
+			url: 'index.php',
 			cache: false,
-			data: {SITES:SITESstring},
+			data: {action:'update', SITES:SITESstring},
 			success: function(msg){ 
 				$E.quitEditByUser();
 				$E.quitEditMode();
@@ -326,10 +326,10 @@ var $E = $E || {}; // GLOBAL SHARED OBJ
 		$('li.sortLinkCat h3').css({cursor:'move'});
 		$('a.l').css({cursor:'move'});	
 		
-		$H.setUlCol(false);
-		$H.posItem();
+		$H.setUlColSize(false);
+		$H.centerElements();
 		initLinkEvent();
 		document.location.hash = 'editmode';
 	};
 	
-})(jQuery, $E);
+});

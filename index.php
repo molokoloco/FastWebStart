@@ -8,15 +8,17 @@ $WWW = ( $local ? 'http://localhost/www.b2bweb.fr/home/' : 'http://home.b2bweb.f
 // Some stuff ///////////////////////////////////////////////////
 
 // Ajax sites user edit
-$action = $_REQUEST['action'];
+$action = (isset($_POST['action']) ? $_POST['action'] : '');
+$action = (isset($_GET['action']) ? $_GET['action'] : $action);
+
 if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	if (empty($_POST['SITES'])) die('0');
 	require_once('fonctions.php');
 	$_SESSION['user']['SITES'] = sanitize($_POST['SITES']); // Session backup, cf. ./js/sitesDatas.js.php
-	if ($_SESSION['user']['fb_userid'] > 0) {
+	/*if ($_SESSION['user']['fb_userid'] > 0) {
 		$fp = @fopen('./js/usersdatas/sitesDatas_'.$_SESSION['user']['fb_userid'].'.js', 'w+b');
 		if ($fp) { rewind($fp); fwrite($fp, $_SESSION['user']['SITES']); fclose($fp); die('1'); } // A little more security please o_O
-	}
+	}*/
 	die('ok');
 }
 
@@ -172,7 +174,7 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 		<p>Les pr&eacute;f&eacute;rences sont uniquement stock&eacute;es dans un <strong>cookie</strong> de votre navigateur. Ce site respecte votre vie priv&eacute;e.</p>
 		<p>&nbsp;</p>
 		<h3>G&eacute;n&eacute;ral :</h3>
-		<ul><li><a href="javascript:void(0);" onClick="javascript:return $H.toggleFoxy();" id="toggleFoxy">Afficher/Masquer</a> &quot;Foxy&quot; (la chose qui bouge en haut ;)</li><li><a href="javascript:void(0);" onClick="javascript:return $H.toggleStock();" id="toggleStock">Retenir/Oublier</a> vos recherches (Cookie navigateur)</li></ul>
+		<ul><li><a href="javascript:void(0);" onClick="javascript:return $H.toggleFoxy();" id="toggleFoxy">Afficher/Masquer</a> &quot;Foxy&quot; (la chose qui bouge en haut ;)</li><li><a href="javascript:void(0);" onClick="javascript:return $H.toggleCookiesTerms();" id="toggleCookiesTerms">Retenir/Oublier</a> vos recherches (Cookie navigateur)</li></ul>
 		<h3>Th&egrave;mes :</h3>
 		<ul><li><a href="javascript:void(0);" rel="<?=$WWW;?>css/styles.css" class="css">Original Blues</a></li><li><a href="javascript:void(0);" rel="<?=$WWW;?>css/style_light.css" class="css">Light Room</a></li><li><a href="javascript:void(0);" rel="<?=$WWW;?>css/style_dark.css" class="css"><em>Black monday</em></a> (Todo)</li></ul>
 		<h3>Image de fond :</h3>

@@ -7,7 +7,8 @@
 {href:'http://fr.wikipedia.org/wiki/Portail:Internet', result:'http://fr.wikipedia.org/wiki/{R}', tips:'Portail Internet Wikipédia', title:'<strong>Wikipédia</strong>'}, 
 {href:'http://stackoverflow.com', result:'http://stackoverflow.com/search?q={R}', tips:'Stack Overflow is a collaboratively edited question and answer site for programmers', title:'<strong>StackOverflow</strong>'}, 
 {href:'http://www.alsacreations.com/tutoriels/', tips:'Alsacréations - Tutoriels XHTML, CSS, Accessibilité, JavaScript', title:'AlsaCreations'},
-{href:'http://start.fedoraproject.org', tips:'Recherche filtrées par type de licences', title:'startFedoraProject'},
+{href:'http://start.fedoraproject.org', tips:'Recherche filtrées par type de licences', title:'FedoraProject'},
+{href:'http://doc.ubuntu-fr.org/?do=search&id=love&tsearch=Documentation',result:'http://doc.ubuntu-fr.org/?do=search&id={R}&tsearch=Documentation', tips:'Documentation Ubuntu Francophone', title:'UbuntuDocs'},
 {href:'http://www.siteduzero.com', result:'http://www.siteduzero.com/recherche.html?src={R}&c=3', tips:'Site communautaire de tutoriels gratuits pour débutants', title:'SiteDuZero'},
 {href:'http://www.archive.org', result:'http://www.archive.org/search.php?query={R}', tips:'Internet Archive: Wayback Machine', title:'WebArchive'}
 ]}, {title: 'SYSTEMS', data : [
@@ -17,22 +18,25 @@
 {href:'http://www.asp.net', tips:'The Official Microsoft ASP.NET Site', title:'Asp'}, 
 {href:'http://www.java.com/fr/download/help/index.xml', result:'http://search.sun.com/javacom/index.jsp?locale=fr&col=javacom_fr&charset=utf-8&qt={R}', tips:'Centre d\'aide Java', title:'Java'}, 
 {href:'http://doc.ubuntu-fr.org', result:'http://doc.ubuntu-fr.org/?do=search&id={R}', tips:'Documentation Ubuntu Francophone', title:'Ubuntu'}, 
-{href:'http://forum.ovh.com/index.php', tips:'Forum Aide OVH', title:'Ovh'},
+{href:'http://www.ovh.com', tips:'Hébergement mutualisé serveurs dédiés', title:'Ovh'},
+{href:'http://www.online.net', tips:'Hébergement mutualisé serveurs dédiés', title:'Online'},
 {href:'http://www.amen.fr', tips:'Hébergeur, nom de domaine, serveur dédié ou privé', title:'Amen'},
-{href:'http://www.gandi.net', tips:'Nom de domaine et hébergement cloud', title:'Gandi'}
+{href:'http://www.gandi.net', tips:'Nom de domaine et hébergement cloud', title:'Gandi'},
+{href:'http://php.opensourcecms.com/scripts/show.php?catid=1&cat=CMS%20/%20Portals', tips:'Try before you install', title:'OpenSourceCMS'}, 
+{href:'http://demolabo.com', tips:'Try open source demos and compare them before install', title:'DemoLabo'}
 ]}, {title: 'EDITING', data : [
 {href:'http://ideone.com', tips:'Compile and run code online in more than 40 programming languages', title:'IdeOne'}, 
 {href:'http://www.coderun.com', tips:'Online Web development IDE', title:'<strong>CodeRun</strong>'},
+{href:'http://jsfiddle.net', tips:'Online Editor for the Web (JavaScript, HTML, CSS)', title:'<strong>JsFiddle</strong>'},
+{href:'http://c9.io/dashboard.html', tips:'Your code, anywhere, anytime (JS/HTML/PHP...)', title:'Cloud9'},
+{href:'http://www.akshell.com/ide/', tips:'Server-side JavaScript development and hosting', title:'Akshell'},
+{href:'https://bespin.mozillalabs.com', tips:'Code in the cloud, by Mozilla', title:'Bespin'},
 {href:'http://tinymce.moxiecode.com/tryit/full.php', tips:'Online HTML WYSIWYG editor', title:'<strong>TinyMce</strong>'},
 {href:'http://www.balsamiq.com/demos/mockups/Mockups.html', tips:'WebApp mockups, before writing code', title:'Balsamiq'}, 
 {href:'http://www.mindomo.com', tips:'Mind Mapping', title:'Mindomo'}, 
 {href:'http://aviary.com', tips:'A suite of powerful creative applications (Image Editor, Effects Editor, ...)', title:'Aviary'}, 
 {href:'http://www.pixlr.com/app', tips:'Online Photo editor', title:'<strong>PixlR</strong>'}, 
-{href:'http://www.degraeve.com/favicon', tips:'Favicon Editor', title:'FavIcon'}, 
-{href:'http://pipes.yahoo.com/pipes/person.info', result:'http://pipes.yahoo.com/pipes/search?q={R}', tips:'Editing RSS in LIVE', title:'YahooPipes'}, 
-{href:'http://www.xfruits.com', tips:'Compose your information system', title:'xFruits'}, 
-{href:'http://php.opensourcecms.com/scripts/show.php?catid=1&cat=CMS%20/%20Portals', tips:'Try before you install', title:'OpenSourceCMS'}, 
-{href:'http://demolabo.com', tips:'Try open source demos and compare them before install', title:'DemoLabo'}
+{href:'http://www.degraeve.com/favicon', tips:'Favicon Editor', title:'FavIcon'}
 ]}, {title: 'DESIGN', data : [
 {href:'http://colorschemedesigner.com', tips:'Color Scheme Designer 3', title:'<strong>ColorScheme</strong>'}, 
 {href:'http://kuler.adobe.com', result:'http://kuler.adobe.com/#themes/search?term={R}', tips:'Color Scheme Designer 3', title:'Kuler'}, 
@@ -55,7 +59,9 @@
 {href:'http://developer.yahoo.com/everything.html#tools', result:'http://search.yahoo.com/search?va={R}&vs=developer.yahoo.com&vs=developer.yahoo.net', tips:'Yahoo! Developer Network - Developers Resources', title:'YahooDeveloper'}, 
 {href:'https://addons.mozilla.org', result:'https://addons.mozilla.org/fr/firefox/search?q={R}', tips:'Modules pour Firefox', title:'FirefoxAddons'}, 
 {href:'http://www.nirsoft.net/utils/index.html#programmer_tools', tips:'Freeware Utilities for Windows', title:'ProgrammerTools'}, 
-{href:'http://patterntap.com', tips:'Organized Web Design Collection of User Interfaces', title:'PatternTap'}
+{href:'http://patterntap.com', tips:'Organized Web Design Collection of User Interfaces', title:'PatternTap'},
+{href:'http://pipes.yahoo.com/pipes/person.info', result:'http://pipes.yahoo.com/pipes/search?q={R}', tips:'Editing RSS in LIVE', title:'YahooPipes'}, 
+{href:'http://www.xfruits.com', tips:'Compose your information system', title:'xFruits'}, 
 ]}, {title: 'HTML/CSS', data : [
 {href:'http://www.w3.org/MarkUp/#recommendations', tips:'W3C HTML : (Extensible) HyperText Markup Language Reference (Current Work)', title:'W3cHtml'}, 
 {href:'http://www.w3.org/Style/CSS/current-work', tips:'W3C CSS : Cascading Style Sheets Reference (Current Work)', title:'W3cCss'}, 
@@ -69,9 +75,6 @@
 {href:'http://www.css3maker.com', tips:'Cross-Browser CSS3 Rule Generator', title:'CSS3maker'},
 {href:'http://www.colorzilla.com/gradient-editor', tips:'Ultimate CSS Gradient Generator', title:'CSS3Gradient'},
 ]}, {title: 'JAVASCRIPT', data : [
-{href:'http://jsfiddle.net', tips:'Online Editor for the Web (JavaScript, HTML, CSS)', title:'<strong>JsFiddle</strong>'},
-{href:'http://jsperf.com', tips:'JavaScript performance playground', title:'JSperf'},
-{href:'https://bespin.mozillalabs.com', tips:'Code in the cloud', title:'Bespin'},
 {href:'http://docs.jquery.com', result:'http://docs.jquery.com/Special:Search?ns0=1&search={R}', tips:'jQuery JavaScript Library Documentation', title:'<strong>jQueryDoc</strong>'},
 {href:'https://developer.mozilla.org/en/JavaScript', result:'https://developer.mozilla.org/Special:Search?search={R}', tips:'Mozilla JavaScript Reference', title:'MozillaJS'}, 
 {href:'http://msdn.microsoft.com/en-us/library/4yyeyb0a%28VS.85%29.aspx', result:'http://social.msdn.microsoft.com/Search/en-US/?Refinement=117&Query={R}&ir=1', tips:'Windows JScript Reference', title:'WindowsJS'}, 
@@ -83,6 +86,7 @@
 {href:'http://phonegap.pbworks.com/', result:'http://phonegap.pbworks.com/FindPage?SearchFor={R}', tips:'Open source development framework for building cross-platform mobile apps', title:'PhoneGap'},
 {href:'http://phpjs.org/functions/index', tips:'High-level PHP functions to low-level JavaScript platforms such as web browsers', title:'PhpJS'},
 {href:'http://code.google.com/intl/fr/apis/ajax/', result:'http://code.google.com/intl/fr/query/#p=ajax&q={R}', tips:'Google AJAX APIs - Google Code', title:'GoogleJsApi'},
+{href:'http://jsperf.com', tips:'JavaScript performance playground', title:'JSperf'},
 {href:'http://www.minifyjavascript.com', tips:'JavaScript Compressor', title:'MinifyJS'}, 
 {href:'http://closure-compiler.appspot.com/home', tips:'JavaScript Closure Compiler Service by Google', title:'<strong>ClosureCompiler</strong>'}, 
 {href:'http://jsbeautifier.org', tips:'Javascript unpacker and beautifier', title:'JsBeautifier'}, 
@@ -91,8 +95,8 @@
 {href:'http://fr.php.net', result:'http://fr.php.net/manual-lookup.php?pattern={R}', tips:'PHP: Manual Quick Reference', title:'<strong>PhpNet</strong>'},
 {href:'http://www.phpclasses.org/browse/', result:'http://www.phpclasses.org/search.html?words={R}&go_search=1', tips:'Browse the available classes - PHP Classes', title:'PhpClasses'}, 
 {href:'http://framework.zend.com/manual/en/', result:'http://framework.zend.com/manual/search?query={R}&language=en&version=1.11', tips:'Zend Framework Manual [en]', title:'Zend'}, 
-{href:'http://www.codeassembly.com/examples/beautifier.php', tips:'Online php code beautifier', title:'PhpBeautifier'}, 
 {href:'http://phpanywhere.net', tips:'Online php code editor (IDE)', title:'PhpAnywhere'},
+{href:'http://beta.phpformatter.com', tips:'Online php code beautifier', title:'PhpBeautifier'}, 
 {href:'http://dev.mysql.com/doc/refman/5.0/fr/ix01.html', result:'http://search.mysql.com/search?q={R}&lr=lang_fr', tips:'MySQL 5.0 Reference Manual', title:'MySqlDoc'}, 
 {href:'http://www.sqlite.org', result:'http://www.sqlite.org/search?q={R}', tips:'SQLite Home Page', title:'SQLite'},
 {href:'http://ondras.zarovi.cz/sql/demo', tips:'Online SQL Designer', title:'SqlDesigner'}, 
