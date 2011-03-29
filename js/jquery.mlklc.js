@@ -82,7 +82,7 @@ $(function() {
 	
 	// ====================== "Global" VARS =================================================================//
 
-	// Main elements... (others are badly mixed in code...) : Setted in DOM init !
+	// Main elements (Setted in DOM init !)... others are badly mixed in code ^^
 	var $inputQ = null, 	// $('input#q'); // Main input for searches
 		$aLinks = null, 	// $('a.l'); // Les liens magiques
 		$foxy = null, 		// $('div#foxy'); // Le truc qui bouge
@@ -344,14 +344,14 @@ $(function() {
 	// ====================== EVENTS LISTENER =================================================================//
 
 	// Gestion des listeners...
-	var initLinksEvents = function() {
+	var initElementsEvents = function() {
 			$aLinks.bind('click', linkClickSearch).bind('mouseenter', mouseEnterLink).bind('mouseleave', mouseLeaveLink);
 			$inputQ.bind('keyup', linksFadeNoSearch).bind('mouseenter', inputSetFocus).bind('focus', inputFocus).bind('blur', inputBlur);
 			$('select#searcher').bind('change', searchBotAdvanced);
 			$(document).bind('keypress', linksHighlight);
 			$('div#SearchBot a.l').keynav(); // Initialize jQuery keyboard navigation // http://mike-hostetler.com/jquery-keyboard-navigation-plugin // Checkup TODO !
 		},
-		removeLinksEvents = function() { // Gestion des listeners... garbage colector..
+		removeElementsEvents = function() { // Gestion des listeners... garbage colector..
 			$aLinks.unbind('click', linkClickSearch).unbind('mouseenter', mouseEnterLink).unbind('mouseleave', mouseLeaveLink);
 			$inputQ.unbind('keyup', linksFadeNoSearch).unbind('mouseenter', inputSetFocus).unbind('focus', inputFocus).unbind('blur', inputBlur);
 			$('select#searcher').unbind('change', searchBotAdvanced);
@@ -448,7 +448,7 @@ $(function() {
 	$H.editSites = function(event){
 		if (event) event.preventDefault();
 		editButton(false);
-		removeLinksEvents();
+		removeElementsEvents();
 		if (typeof($E) == 'undefined') {
 			loadCss($H.WWW+'css/start/jquery-ui-1.8.custom.css');
 			getScript($H.WWW+'js/jquery-ui-1.8.sortableDialog.min.js');
@@ -464,7 +464,7 @@ $(function() {
 	
 	// FRONT // Overwrite SITES datas var with new one...
 	$H.setDatas = function(type) { 
-		removeLinksEvents(); // When rebuilding data, delete previous listenners
+		removeElementsEvents(); // When rebuilding data, delete previous listenners
 		var jsSrc = 'js/sitesDatas.js.php'; // Pass through .PHP if user got $_SESSION
 		switch (type) {
 			case 'code' : jsSrc = 'js/sitesDatas-code.js'; break;
@@ -515,7 +515,7 @@ $(function() {
 		$H.setUlColSize(true);
 		$H.centerElements();
 		rdmLinkHighlight();
-		initLinksEvents();
+		initElementsEvents();
 	};
 	
 	
