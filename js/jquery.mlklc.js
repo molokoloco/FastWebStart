@@ -90,7 +90,7 @@ $(function() {
 		
 	// Public
 	var maxSearchLength = 250, // Max search characters in cookie
-		cookieOptions = {expires:0, path:'/', domain:document.domain};
+		cookieOptions = {expires:360, path:'/'};//, domain:document.domain};
 	
 	// Privates
 	var W = 800, H = 600, docW = 800, docH = 600, // Window viewport
@@ -154,9 +154,15 @@ $(function() {
 	// ====================== FRONT LINKS actions =================================================================//
 	
 	// Navigational #hash
-	var getHash = function() { return document.location.hash || $.cookie('hash') || 'home' },
-		setHash = function(hash) { document.location.hash = hash; $.cookie('hash', '#'+hash, cookieOptions); };
-		
+	var getHash = function() {
+			var hash = document.location.hash.replace(/^#/, '');
+			return hash || $.cookie('hash') || 'home';
+		},
+		setHash = function(hash) {
+			window.location.hash = hash; 
+			$.cookie('hash', hash, cookieOptions);
+		};
+
 	// Edit the links ?
 	var editButton = function(edit) {
 		if ($.browser.msie) $('span#editmode').html(' D&eacute;sol&eacute;, <strong>Internet Explorer</strong> n\'est pas support&eacute; :-( ! | ');
@@ -538,13 +544,14 @@ $(function() {
 		if ($.cookie('foxy')) foxAnim = ($.cookie('foxy') == 'yes' ? true : false);
 		var hash = getHash(); // D'abord dans l'URL puis dans le cookie...
 		switch (hash) { // Load sites DATAS
-			case '#code': $H.setDatas('code'); break; // Load sitesData-code.js...
-			case '#twitter': $H.setDatas('twitter'); break;
+			case 'code': $H.setDatas('code'); break; // Load sitesData-code.js...
+			case 'twitter': $H.setDatas('twitter'); break;
 			default:
 				$H.buildSites(); // Datas already here (faster init)
-				if (hash == '#editmode') $H.editSites();
+				if (hash == 'editmode') $H.editSites();
 				else $H.initSites();
 		}
+		setHash(hash);
 		$(document).bind('mousemove', documentMove).bind('click', documentClick);
 		$(window).bind('resize', $H.centerElements);
 		clock();
