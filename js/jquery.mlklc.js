@@ -58,7 +58,8 @@ var db = function() { 'console' in window && console.log.call(console, arguments
 	event2key = {'97':'a', '98':'b', '99':'c', '100':'d', '101':'e', '102':'f', '103':'g', '104':'h', '105':'i', '106':'j', '107':'k', '108':'l', '109':'m', '110':'n', '111':'o', '112':'p', '113':'q', '114':'r', '115':'s', '116':'t', '117':'u', '118':'v', '119':'w', '120':'x', '121':'y', '122':'z'},
 	pad = function(n) { return (n < 10 ? '0'+n : n); },
 	addslashes = function (str) { return (str+'').replace(/\'/g,'\\\'').replace(/"/g, '&quot;').replace(/\u0000/g, "\\0"); },
-	input2html = function(str) { return unescape(str+'').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); },
+	html2input = function(str) { return unescape(str+'').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); },
+	input2html = function(str) { return (str+'').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"'); },
 	// index.html?name=foo -> 	name = getUrlVars()[name]; 
 	_vars = {}, getUrlVars = function() { if (_vars.length > 0) return _vars; var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) { _vars[key] = value; }); return _vars; },
 	// sites['link'].sort($.objSortByTitle);
@@ -89,7 +90,10 @@ $(function() {
 		$searchBot = null; 	// $('div#SearchBot'); 
 		
 	// Public
-	var maxSearchLength = 250, // Max search characters in cookie
+	var googleSearchUrl = 'http://www.google.fr/search',
+		anonymousSearchUrl = 'http://google.b2bweb.fr/search',
+		isAnonymous = ($.cookie('isAnonymous') === 'no' ? false : true);
+		maxSearchLength = 250, // Max search characters in cookie
 		cookieOptions = {expires:360, path:'/'};//, domain:document.domain};
 	
 	// Privates
@@ -101,43 +105,47 @@ $(function() {
 	// ====================== STOCK SEARCHs in cookie =================================================================//
 	
 	// Display cookie stocked search terms
-	var cookieLoadTerms = function(fill) {
+	var cookieLoadTerms = function(init) {
 		// $.cookie('search', 'love##test', {expires: 365, path: '/'});
 		// Also tested with DOM data, but fail in Chrome (Lost when refresh ?) $('body').data('search', {search1:'word1'});
-		if ($.cookie('toStock') == 'no') return;
-		var terms = null, termsHtml = '', vTerm = '', vLink = '';
+		if ($.cookie('searchHistory') == 'no') return;
+		var terms = null, termsHtml = '', vTerm = '';
 		if ((terms = $.cookie('search'))) {
 			$.each(terms.split('##'), function(i, v) {
 				if (v == '') return;
-				vTerm = input2html(v);
-				vLink = addslashes(vTerm);
-				termsHtml += '<span id="term_'+i+'"><a href="javascript:void(0)" onclick="$(\'input#q\').val(\''+vLink+'\').focus();" class="lien2" title="Ajouter &agrave; la recherche">'+vTerm+'</a><a href="javascript:void(0)" onclick="$H.cookieDeleteTerm(\''+v+'\', \''+i+'\');" title="Effacer">&#10006;</a>, </span>';
+				vTerm = html2input(v);
+				termsHtml += '<span id="term_'+i+'"><a href="javascript:void(0)" onclick="$(\'input#q\').val(\''+addslashes(vTerm)+'\').select();" class="lien2" title="Ajouter">'+vTerm+'</a><a href="javascript:void(0)" onclick="$H.cookieDeleteTerm(\''+v+'\', \''+i+'\');" title="Effacer">&#10006;</a>, </span>';
 			});
 		}
 		if (termsHtml == '') return;
 		$('div#searhTerms').html(termsHtml.substr(0, (termsHtml.length - 9)));
-		if (fill && $inputQ.val() == '') {
-			$inputQ.val(vTerm).select(); // When init, print last
+		if (init && $inputQ.val() == '' && $.cookie('emptySearch') != 'yes') {
+			$inputQ.val(input2html(vTerm)).select(); // When init, re-fill with last search, unless user clear it on his last action
 			searchTermIgnited = true;
 		}
 	};
 	
-	// Add new search term in cookie
-	var cookieAddTerm = function(val) { 
-		if (!val || $.cookie('toStock') == 'no') return;
+	// Add new search term in cookie // called before leaving the page
+	var cookieAddTerm = function(val) {
+		if ($.cookie('searchHistory') == 'no') return; // Preferences "pas de stock des recherches"
+		if (!val) {
+			$.cookie('emptySearch', 'yes', cookieOptions);  // if search is empty, don't re-fill next time
+			return; // Nothing to stock...
+		}
+		$.cookie('emptySearch', 'no', cookieOptions); // re-fill search next time
 		var terms = null, exist = false, termsCookie = [], totalLength = val.length;
 		val = escape(val); // addslashes(escape(val)); // htmlentities(val, 'ENT_QUOTES') // http://phpjs.org/functions/htmlentities
 		if ((terms = $.cookie('search'))) { // Check if already exist
 			$.each(terms.split('##'), function(i, v) { 
 				if (v == val) exist = true;
 				else totalLength += unescape(v).length;
-				if (v != '' && totalLength < maxSearchLength) termsCookie.push(v);
+				if (v != '' && totalLength < maxSearchLength) termsCookie.push(v); // Limited size...
 			});
 		}
 		if (exist) return;
 		termsCookie.push(val);
 		$.cookie('search', termsCookie.join('##'), cookieOptions);
-		cookieLoadTerms();
+		cookieLoadTerms(); // Display, even if user leave the page
 	};
 	
 	// Remove a search term in cookie
@@ -159,7 +167,8 @@ $(function() {
 			return hash || $.cookie('hash') || 'home';
 		},
 		setHash = function(hash) {
-			window.location.hash = hash; 
+			// window.location.hash = '#'+hash; 
+			window.location.replace($H.WWW+'#'+hash); // No index
 			$.cookie('hash', hash, cookieOptions);
 		};
 
@@ -172,14 +181,14 @@ $(function() {
 	
 	// Prefs, Stop/Start stocking input
 	$H.toggleCookiesTerms = function() {
-		toStock = ($.cookie('toStock') == 'no' ? true : false);
+		toStock = ($.cookie('searchHistory') == 'no' ? true : false);
 		if (toStock) { cookieLoadTerms(); $('div#searhTerms').show(); }
 		else { $.cookie('search', '', cookieOptions); $('div#searhTerms').hide(); }
-		$.cookie('toStock', (toStock ? 'yes' : 'no'), cookieOptions);
+		$.cookie('searchHistory', (toStock ? 'yes' : 'no'), cookieOptions);
 		$('a#toggleCookiesTerms').html((toStock ? 'Effacer' : 'Sauver'));
 	};
 	
-	// Prefs, Show/hide foxy
+	// Prefs, Show/Hide Foxy
 	$H.toggleFoxy = function() {
 		foxAnim = !foxAnim;
 		if (foxAnim) { $foxy.show(); $(document).trigger('mousemove'); }
@@ -211,18 +220,6 @@ $(function() {
 	var timer = function() { var dt = new Date(); $('span#heure').html(pad(dt.getHours())+':'+pad(dt.getMinutes())+':'+pad(dt.getSeconds())); };
 	var clock = function() { setInterval(timer, 1000); };
 	
-	// Fade in intro..
-	/*var createFrame = function(e) {
-		$linkFocus = $(e.target);
-		var top = (e.pageX > (H / 2) ? 100 : (H / 2) );
-		var left = (e.pageW > (W / 2) ? 100 : (W / 2) );
-		$('<div />')
-			.attr({id:'overlay'}).css({top:e.pageY, left:e.pageX, width:((W/2)-100)+'px', height:((H/2)-100)+'px'})
-			//.html('<h1>Message...</h1><p>'+message+'</p>')
-			.appendTo('body')//.hide().fadeIn(200)
-			.delay(5000).fadeOut(400, function(){ $(this).remove(); });
-	};*/
-	
 	// ====================== EVENTS ACTIONS =================================================================//
 	
 	// Smart focus input
@@ -245,11 +242,24 @@ $(function() {
 			}
 		};
 	
-	/*var mouseEnterLinkTimer = null;
-	var timerLinkOpenFrame = function(e) {
-		if (!currentLinkEnter) return;
-		createFrame(e);
-	};*/
+	
+	/*	// TODO...
+		var mouseEnterLinkTimer = null;
+		var timerLinkOpenFrame = function(e) {
+			if (!currentLinkEnter) return;
+			createFrame(e);
+		};
+		
+		var createFrame = function(e) {
+			$linkFocus = $(e.target);
+			var top = (e.pageX > (H / 2) ? 100 : (H / 2) );
+			var left = (e.pageW > (W / 2) ? 100 : (W / 2) );
+			$('<iframe />')
+				.attr({id:'frameSet'}).css({top:e.pageY, left:e.pageX, width:((W/2)-100)+'px', height:((H/2)-100)+'px'})
+				.appendTo('body')//.hide().fadeIn(200)
+				.delay(5000).fadeOut(400, function(){ $(this).remove(); });
+		};
+	*/
 	
 	var mouseEnterLink = function(event) {
 			inputSetBlur();
@@ -264,13 +274,13 @@ $(function() {
 	
 	// Catch and linkClickSearch clicked link if we got search value ?
 	var linkClickSearch = function(event) {
-		if ($inputQ.val() != '' && $(this).attr('rel') && $(this).attr('rel').indexOf('{R}') != -1) {
-			var val = $inputQ.val();
-			cookieAddTerm(val);
-			val = escapeURI(val);
-			return !window.open($(this).attr('rel').replace(/{R}/g, val));
+		var val = $inputQ.val(),
+			rel = $(this).attr('rel');
+		cookieAddTerm(val);
+		if (val != '' && rel != '' && rel.indexOf('{R}') != -1) {
+			return !window.open($(this).attr('rel').replace(/{R}/g, escapeURI(val)));
 		}
-		return true;
+		return true; // Open link...
 	};
 	
 	// First input#q letter hide sites without search fonction
@@ -327,8 +337,7 @@ $(function() {
 					$('div#footerBg').css({opacity:o});
 					if (count >= 222) { // Clear all, enter iddle mode
 						clearInterval(intr);
-						$foxy.stop(true, true);
-						$foxy.animate({top:'-'+$foxy.height()+'px', opacity:0}, function() { startAnime = true; count = 0; });
+						$foxy.stop(true, true).animate({top:'-'+$foxy.height()+'px', opacity:0}, function() { startAnime = true; count = 0; });
 						$('div#footerBg').css({opacity:.8});
 					}
 					else if (count % parseInt(Math.random() * 20) == 0) dist = Math.abs(Math.cos(count/100)) * 10;
@@ -339,8 +348,8 @@ $(function() {
 		}
 		else if (foxAnim && !$foxy.is(':animated')) {
 			var l = (event.pageX || 360) - 120;
-			var v = ($(window).width() / 2) - 120;
-			if (l < v) { l += v; if (l > $(window).width() - 250) l = $(window).width() - 240; }
+			var v = (W / 2) - 120; // W == $(window).width()
+			if (l < v) { l += v; if (l > W - 250) l = W - 240; }
 			else { l -= v; if (l < 0) l = 0; }
 			$foxy.animate({left:l}, {duration:1400, easing:'easeInQuad'});
 			count = 0;
@@ -366,24 +375,41 @@ $(function() {
 		};
 	
 	// ====================== SEARCH FORM and INPUT =================================================================//
-	
-	// Some start fct
+		
 	var searchFormInit = function() {
-		var searcher = getUrlVars()['searcher']; // Cas special recherche Wikipedia
-		if (searcher && /(home\.b2bweb\.fr)/.test(searcher))
-			window.document.location.href = 'http://fr.wiktionary.org/wiki/'.escape(getUrlVars()['q']);
 		$('select#searcher')[0].selectedIndex = 0; // FF don't keep default menu item
 		$inputQ.attr({autocomplete:'off'}); // Not valid for XHTML 1.0
-		$('form#f').bind('submit', function(event) {
-			cookieAddTerm($inputQ.val());
-		});
+		$('form#f').bind('submit', searchFormSubmit);
+		$H.setFormAction(!isAnonymous); // Init form action, without toggle
 	};
 	
-	// SearchBoOoot <select>
+	// Form fct
+	var searchFormSubmit = function(event) {
+		cookieAddTerm($inputQ.val());
+		// Cas special recherche Wikipedia
+		var formAction = $('form#f').attr('action');
+		if (formAction != googleSearchUrl &&  /(home\.b2bweb\.fr)/.test(googleSearchUrl)) {
+			event.preventDeafult();
+			window.document.location.href = 'http://fr.wiktionary.org/wiki/'.escapeURI($inputQ.val());
+		}
+	};
+	
+	$H.setFormAction = function(anonymous) {
+		// <a href="http://google.b2bweb.fr/search?hl=fr&amp;q=anonyme" onClick="if ($('input#q').val() != '') return window.open('http://google.b2bweb.fr/search?hl=fr&amp;q='+$('input#q').val());" class="lien2" id="anonyme">Recherche anonyme</a>
+		if (typeof(anonymous) !== 'boolean') anonymous = isAnonymous; // Default
+		anonymous = !anonymous; // Toggle
+		$('form#f').attr('action', (anonymous ? anonymousSearchUrl : googleSearchUrl));
+		$('a#anonyme').text(anonymous ? 'Recherche anonyme' : 'Recherche normale');
+		$.cookie('isAnonymous', (anonymous ? 'yes' : 'no'), cookieOptions);
+		isAnonymous = anonymous;
+		return false;
+	};
+	
+	// Search BoOoot <select>
 	var searchBotAdvanced = function(event) { 
-		$('form#f').attr('action', 'http://www.google.fr/search'); // Re-Init form action
-		var searchVal = $('input#searcher option:selected').val(); // Check this to understand next lines
-		if (searchVal == '') { $inputQ.val(''); return; }
+		$H.setFormAction(!isAnonymous); // Re-Init form action, without toggle
+		var searchVal = $('select#searcher option:selected').val(); // Check this to understand next lines
+		if (searchVal == '') return;
 		if (searchVal.indexOf('|') >= 0) { // Expression ?
 			var searchValArr = searchVal.split('|');
 			$('form#f').attr('action', searchValArr[0]); // url
@@ -397,7 +423,7 @@ $(function() {
 			$inputQ.val(searchVal);
 			$inputQ.selectRange(searchVal.indexOf('{'), (searchVal.indexOf('}')+1)); // autoselect word to be edited
 			expressionFilled = true;
-		} 
+		}
 	};
 
 	// ====================== LINKS and PAGES structure =================================================================//
@@ -535,13 +561,12 @@ $(function() {
 		$aLinks = $('a.l'); // Les liens magiques
 		$foxy = $('div#foxy'); // Le truc qui bouge
 		$searchBot = $('div#SearchBot'); // Main Div container
-		// Load logic (as always as discutable as it can)
-		$searchBot.show();
+		// Load logic (as always as discutable as it be)
 		$('a.css').styleInit(); // Load cookie CSS and manage switch
 		cookieLoadTerms(true); // Cookie stocked user searchs ?
 		menuSelectCurrent(); // Set menu items
 		searchFormInit(); // Search Form scripting
-		if ($.cookie('foxy')) foxAnim = ($.cookie('foxy') == 'yes' ? true : false);
+		$searchBot.fadeIn(300);
 		var hash = getHash(); // D'abord dans l'URL puis dans le cookie...
 		switch (hash) { // Load sites DATAS
 			case 'code': $H.setDatas('code'); break; // Load sitesData-code.js...
@@ -551,7 +576,7 @@ $(function() {
 				if (hash == 'editmode') $H.editSites();
 				else $H.initSites();
 		}
-		setHash(hash);
+		if ($.cookie('foxy')) foxAnim = ($.cookie('foxy') == 'yes' ? true : false);
 		$(document).bind('mousemove', documentMove).bind('click', documentClick);
 		$(window).bind('resize', $H.centerElements);
 		clock();
