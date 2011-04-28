@@ -1,8 +1,9 @@
 var SITES = [ 
 	{title: 'TWITTER', data : [ 
-	{href:'http://www.twitter.com', result:'http://twitter.com/#search?q={R}', tips:'Twitter', title:'Twitter'},
+	{href:'http://www.twitter.com', result:'https://twitter.com/#!/search/{R}', tips:'Recherche dans les conversation Twitter', title:'Twitter'},
 	{href:'http://search.twitter.com', result:'http://search.twitter.com/search?q={R}', tips:'Recherche sur Twitter', title:'TwitterSearch'},
 	{href:'http://search.twitter.com/advanced', result:'http://search.twitter.com/search?q={R}', tips:'Recherche avanc&eacute;e sur Twitter', title:'TwitterAdvancedSearch'},
+	{href:'https://twitter.com/search-advanced', result:'https://twitter.com/#!/search/{R}', tips:'Recherche avanc&eacute;e sur Twitter', title:'TwitterAdvancedSearchV2'},
 	{href:'http://help.twitter.com', result:'http://help.twitter.com/search?query={R}', tips:'Aide Twitter', title:'TwitterHelp'},
 	{href:'http://status.twitter.com', result:'', tips:'Etat de fonctionnement du service Twitter', title:'TwitterStatus'},
 	{href:'http://apiwiki.twitter.com', result:'http://apiwiki.twitter.com/FindPage?SearchFor={R}', tips:'Welcome to the Twitter API wiki', title:'TwitterApiWiki'},
@@ -35,7 +36,7 @@ var SITES = [
 	{href:'http://www.wearehunted.com', result:'http://wearehunted.com/music/news/{R}', tips:'The Online Music Chart', title:'WeAreHunted'},
 	{href:'http://www.hypem.com/twitter/popular', result:'http://hypem.com/search/{R}/1/', tips:'Twitter Music Chart: Hot Songs Tracks MP3 on Twitter', title:'HypeMachine'}
 	]}, {title: 'ORDERING', data : [
-	{href:'http://www.hashtags.org', result:'TODO {R}', tips:'Indexation des hashtags utilis&eacute;s sur Twitter', title:'Hashtags'},
+	{href:'http://www.hashtags.org', result:'http://www.hashtags.org/{R}', tips:'Indexation des hashtags utilis&eacute;s sur Twitter', title:'Hashtags'},
 	{href:'http://www.hashparty.com', result:'http://www.hashparty.com/{R}', tips:'Is about... do you know', title:'HashParty'},
 	{href:'http://www.refollow.com', result:'', tips:'Discover, manage, and protect your Twitter social circle', title:'ReFollow'},
 	{href:'http://www.wefollow.com', result:'http://wefollow.com/twitter/{R}', tips:'User Powered Twitter Directory', title:'WeFollow'},
@@ -45,7 +46,8 @@ var SITES = [
 	{href:'http://twittersentiment.appspot.com', result:'http://twittersentiment.appspot.com/search?query={R}', tips:'What\s the feeling about a word', title:'TwitterSentiment'},
 	{href:'http://www.chirrps.com', result:'http://chirrps.com/?q={R}', tips:'The most popular tweets on the web', title:'Chirrps'},
 	{href:'http://www.thoora.com', result:'http://thoora.com/?c=searcher&q={R}', tips:'Top stories, headlines, world reaction, breaking news', title:'Thoora'},
-	{href:'http://www.favstar.fm', result:'http://favstar.fm/users/{R}', tips:'Most popular recent tweets', title:'FavStar'}
+	{href:'http://www.favstar.fm', result:'http://favstar.fm/users/{R}', tips:'Most popular recent tweets', title:'FavStar'},
+	{href:'http://mirror.me', result:'http://mirror.me/search/{R}', tips:'Explore your interest community ', title:'MirrorMe'}
 	]}, {title: 'UTILITIES', data : [
 	{href:'http://www.twitpic.com', result:'http://twitpic.com/tag/{R}', tips:'Service d\'h&eacute;bergement d\'image pour Twitter', title:'TwitPic'},
 	{href:'http://www.yfrog.com', result:'http://yfrog.com/search.php?s={R}', tips:'Your images and videos on Twitter', title:'YFrog'},

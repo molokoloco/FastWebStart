@@ -58,7 +58,8 @@ var SITES = [
 	{href:'http://www.google.fr/trends', result:'http://www.google.fr/trends?q={R}', tips:'Mesurer l\'intensité des requêtes sur un mot', title:'Marques'},
 	{href:'http://sites.google.com', result:'', tips:'Outil de création de site', title:'Sites'}
 	]}, {title: 'RECHERCHE', data : [
-	{href:'http://www.seeks.fr', result:'http://www.seeks.fr/search?q={R}', tips:'Seeks is a free and open P2P design and application for enabling social websearch', title:'Seeks'},
+	{href:'http://www.seeks.fr', result:'http://www.seeks.fr/search?q={R}', tips:'Seeks is a free and open P2P design and application for enabling social websearch', title:'Seeks'},	
+	{href:'http://duckduckgo.com', result:'http://duckduckgo.com/?q={R}', tips:'DuckDuckGo is a search engine with privacy', title:'DuckDuckGo'},
 	{href:'https://www.scroogle.fr', result:'', tips:'Moteur de recherche anonyme et sécurisé (https)', title:'Scroogle'},
 	{href:'http://www.bing.com', result:'http://www.bing.com/search?q={R}', tips:'Moteur de recherche par Microsoft', title:'Bing'},
 	{href:'http://www.btjunkie.org', result:'http://btjunkie.org/search?q={R}', tips:'Moteur de recherche de fichier .torrents', title:'BTjunkie'},
@@ -76,8 +77,9 @@ var SITES = [
 	{href:'http://www.yahoo.com', result:'http://fr.search.yahoo.com/search?p={R}', tips:'Actualités, moteur de recherche, email gratuit, communautés', title:'Yahoo!'},
 	{href:'http://www.yauba.com', result:'http://www.yauba.com/?q={R}&amp;target=all', tips:'Moteur de recherche anonyme (Inde), fonctionnant en temps réel', title:'<strong>Yauba</strong>'}
 	]}, {title: 'SOCIAL', data : [
-	{href:'http://www.badoo.com', result:'', tips:'C\'est le meilleur point de rencontre', title:'Badoo!'},
+	//{href:'http://www.badoo.com', result:'', tips:'C\'est le meilleur point de rencontre', title:'Badoo!'},
 	//{href:'http://brightkite.com', result:'', tips:'The simple way to keep up with friends &amp; places', title:'Brightkite'},
+	{href:'http://www.pearltrees.com', result:'http://www.pearltrees.com/#/N-q={R}', tips:'Organisation de la curation', title:'PearlTrees'},
 	{href:'http://www.facebook.com/', result:'http://www.facebook.com/search/?q={R}', tips:'Rester en contact et d\'échanger avec les personnes qui vous entourent', title:'<strong>Facebook</strong>'},
 	{href:'http://foursquare.com', result:'http://foursquare.com/search?q={R}', tips:'Meet up with your friends and explore the city', title:'Foursquare'},
 	{href:'http://www.hellotxt.com', result:'', tips:'Save time managing your status update for all your social networks', title:'HelloTxt'},

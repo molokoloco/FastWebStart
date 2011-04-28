@@ -92,7 +92,7 @@ $(function() {
 	// Public
 	var googleSearchUrl = 'http://www.google.fr/search',
 		anonymousSearchUrl = 'http://google.b2bweb.fr/search',
-		isAnonymous = ($.cookie('isAnonymous') === 'no' ? false : true);
+		isAnonymous = ($.cookie('isAnonymous') == 'yes' ? true : false); // By default Not, the Anonymous google proxy (Check prefs)
 		maxSearchLength = 250, // Max search characters in cookie
 		cookieOptions = {expires:360, path:'/'};//, domain:document.domain};
 	
@@ -107,8 +107,7 @@ $(function() {
 	// Display cookie stocked search terms
 	var cookieLoadTerms = function(init) {
 		// $.cookie('search', 'love##test', {expires: 365, path: '/'});
-		// Also tested with DOM data, but fail in Chrome (Lost when refresh ?) $('body').data('search', {search1:'word1'});
-		if ($.cookie('searchHistory') == 'no') return;
+		if ($.cookie('searchHistory') == 'no') return; // Remember search, by default (Check prefs)
 		var terms = null, termsHtml = '', vTerm = '';
 		if ((terms = $.cookie('search'))) {
 			$.each(terms.split('##'), function(i, v) {
@@ -119,10 +118,10 @@ $(function() {
 		}
 		if (termsHtml == '') return;
 		$('div#searhTerms').html(termsHtml.substr(0, (termsHtml.length - 9)));
-		if (init && $inputQ.val() == '' && $.cookie('emptySearch') != 'yes') {
+		/*if (init && $inputQ.val() == '' && $.cookie('emptySearch') != 'yes') {
 			$inputQ.val(input2html(vTerm)).select(); // When init, re-fill with last search, unless user clear it on his last action
 			searchTermIgnited = true;
-		}
+		}*/
 	};
 	
 	// Add new search term in cookie // called before leaving the page
@@ -576,7 +575,7 @@ $(function() {
 				if (hash == 'editmode') $H.editSites();
 				else $H.initSites();
 		}
-		if ($.cookie('foxy')) foxAnim = ($.cookie('foxy') == 'yes' ? true : false);
+		foxAnim = ($.cookie('foxy') == 'no' ? false : true);
 		$(document).bind('mousemove', documentMove).bind('click', documentClick);
 		$(window).bind('resize', $H.centerElements);
 		clock();
