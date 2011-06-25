@@ -38,7 +38,8 @@
 {href:'http://www.degraeve.com/favicon', tips:'Favicon Editor', title:'FavIcon'}
 ]}, {title: 'DESIGN', data : [
 {href:'http://colorschemedesigner.com', tips:'Color Scheme Designer 3', title:'<strong>ColorScheme</strong>'}, 
-{href:'http://kuler.adobe.com', result:'http://kuler.adobe.com/#themes/search?term={R}', tips:'Color Scheme Designer 3', title:'Kuler'}, 
+{href:'http://kuler.adobe.com', result:'http://kuler.adobe.com/#themes/search?term={R}', tips:'Color Scheme Designer 3', title:'Kuler'},
+{href:'http://cssprism.com', result:'http://cssprism.com/spectrum/?css={R}', tips:'Enter the URL of any CSS file to view and modify its color spectrum', title:'CssPrism'},
 {href:'http://www.iconlook.com', result:'http://www.iconlook.com/search.icon?q={R}', tips:'The icon search', title:'IconLook'}, 
 {href:'http://www.freeiconsdownload.com/Index.html', tips:'Free Icons Download', title:'FreeIcons'}, 
 {href:'http://www.iconfinder.net', result:'http://www.iconfinder.net/search/?q={R}', tips:'Search through 128,345 icons', title:'IconFinder'}, 
@@ -71,8 +72,8 @@
 {href:'http://www.immigration-usa.com/html_colors.html', tips:'HTML Color Chart', title:'HtmlColors'},
 {href:'http://www.html5rocks.com', tips:'Web Development to the next level', title:'Html5Rocks'},
 {href:'http://www.codebeautifier.com', tips:'CSS Beautifier/Compressor', title:'CssBeautifier'}, 
-{href:'http://www.css3maker.com', tips:'Cross-Browser CSS3 Rule Generator', title:'CSS3maker'},
-{href:'http://www.colorzilla.com/gradient-editor', tips:'Ultimate CSS Gradient Generator', title:'CSS3Gradient'},
+{href:'http://www.css3maker.com', tips:'Cross-Browser CSS3 Rule Generator', title:'Css3Maker'},
+{href:'http://www.colorzilla.com/gradient-editor', tips:'Ultimate CSS Gradient Generator', title:'Css3Gradient'},
 ]}, {title: 'JAVASCRIPT', data : [
 {href:'http://docs.jquery.com', result:'http://docs.jquery.com/Special:Search?ns0=1&search={R}', tips:'jQuery JavaScript Library Documentation', title:'<strong>jQueryDoc</strong>'},
 {href:'https://developer.mozilla.org/en/JavaScript', result:'https://developer.mozilla.org/Special:Search?search={R}', tips:'Mozilla JavaScript Reference', title:'MozillaJS'}, 

@@ -105,7 +105,7 @@ div.shadow, div.shadow a { text-shadow:#F0F0FF 0px 0px 1px; }
 div.shadow a:hover { text-shadow:#41608F 0px 0px 1px; }
 input#btnG, input#clear { text-shadow:#354D6F 1px 1px 5px; }
 body, input#q { -moz-box-shadow: inset 3px 3px 4px rgba(60,90,126,0.8); -webkit-box-shadow: inset 3px 3px 4px rgba(60,90,126,0.8); box-shadow: inset 3px 3px 4px rgba(60,90,126,0.8); }
-input#btnG, input#clear { -moz-box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3) inset; -webkit-box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3) inset; box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3) inset; }
+input#btnG, input#clear { -moz-box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset; -webkit-box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset; box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3) inset; }
 div#searchBox, div#tooltip, /*#divEdit,*/ div#info, div#prefs, .autocomplete  { -moz-box-shadow: 3px 3px 6px rgba(60,90,126,0.8); -webkit-box-shadow: 3px 3px 6px rgba(60,90,126,0.8); box-shadow: 3px 3px 6px rgba(60,90,126,0.8); }
 
 /* -------------------------------------- JS autocomplete -------------------------------------------- */
