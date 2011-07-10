@@ -48,7 +48,7 @@
 {href:'http://facebook-symbols.com/all/', tips:'All symbols -for Facebook- (character list)', title:'Symbols'},
 {href:'http://www.typetester.org', tips:'Compare fonts for the screen', title:'Typetester'},
 {href:'http://www.typefolly.com', tips:'CSS3 Web typography tool', title:'TypeFolly'},
-{href:'http://code.google.com/webfonts/preview', tips:'Font Preview - Google Font Directory', title:'GoogleWebFonts'}
+{href:'http://www.google.com/webfonts/v2', tips:'Font Preview - Google Font Directory', title:'GoogleWebFonts'}
 ]}, {title: 'RESSOURCES', data : [
 {href:'http://code.google.com/p/molokoloco-coding-project/wiki/WikiMenu?tm=6', result:'http://code.google.com/p/molokoloco-coding-project/w/list?can=1&q={R}', tips:'Molokoloco\'s Personal Coding ToolTips', title:'<strong>WikiMolokoloco</strong>'},
 {href:'http://code.google.com/intl/fr/more/', result:'http://code.google.com/intl/fr/query/#q={R}', tips:'Google API Directory', title:'GoogleAPI'},
@@ -61,7 +61,7 @@
 {href:'http://www.nirsoft.net/utils/index.html#programmer_tools', tips:'Freeware Utilities for Windows', title:'ProgrammerTools'}, 
 {href:'http://patterntap.com', tips:'Organized Web Design Collection of User Interfaces', title:'PatternTap'},
 {href:'http://pipes.yahoo.com/pipes/person.info', result:'http://pipes.yahoo.com/pipes/search?q={R}', tips:'Editing RSS in LIVE', title:'YahooPipes'}, 
-{href:'http://www.xfruits.com', tips:'Compose your information system', title:'xFruits'}, 
+{href:'http://www.xfruits.com', tips:'Compose your information system', title:'xFruits'}
 ]}, {title: 'HTML/CSS', data : [
 {href:'http://www.w3.org/MarkUp/#recommendations', tips:'W3C HTML : (Extensible) HyperText Markup Language Reference (Current Work)', title:'W3cHtml'}, 
 {href:'http://www.w3.org/Style/CSS/current-work', tips:'W3C CSS : Cascading Style Sheets Reference (Current Work)', title:'W3cCss'}, 
@@ -74,6 +74,7 @@
 {href:'http://www.codebeautifier.com', tips:'CSS Beautifier/Compressor', title:'CssBeautifier'}, 
 {href:'http://www.css3maker.com', tips:'Cross-Browser CSS3 Rule Generator', title:'Css3Maker'},
 {href:'http://www.colorzilla.com/gradient-editor', tips:'Ultimate CSS Gradient Generator', title:'Css3Gradient'},
+{href:'http://www.modernizr.com', tips:'Helps you build the next generation of HTML5 and CSS3-powered websites', title:'ModernizR'}
 ]}, {title: 'JAVASCRIPT', data : [
 {href:'http://docs.jquery.com', result:'http://docs.jquery.com/Special:Search?ns0=1&search={R}', tips:'jQuery JavaScript Library Documentation', title:'<strong>jQueryDoc</strong>'},
 {href:'https://developer.mozilla.org/en/JavaScript', result:'https://developer.mozilla.org/Special:Search?search={R}', tips:'Mozilla JavaScript Reference', title:'MozillaJS'}, 

@@ -80,6 +80,7 @@ div#overlay { background:#41608F; }
 body, p, td, div, select#searcher, div#tooltip, div#info, div#prefs, div#divEditInfos, div#header div, div#header div a { color:#A7E6F5; }
 a, a.l:hover, a.l, a.l:visited, a.hightlight, #btnG, input#clear { color:#FFF; }
 a.l:hover strong, a.l strong, a.l:visited strong { font-weight:normal; }
+a.l:hover span, a.l span, a.l:visited span { letter-spacing:-1px; font-size:9px; color:#FFCC33; vertical-align:super; margin:0; padding:1px; line-height:0;}
 a:hover, div#header div a:hover, div#footer p a:hover, div#footer p a:hover, a:active, a.l:active, a.lien2:hover, .hightlight:first-letter, a.hightlight:first-letter, a.hightlight2, a.hightlight2:visited, div#divEditInfos h3, input#btnG:hover, input#clear:hover { color:#FFCC33; }
 a:first-letter {} /*for FF */
 div#footer p, div#footer p a, input#q, input, td.gac_c, select#searcher option, select#searcher optgroup, form#formEdit label {color:#41608F; }

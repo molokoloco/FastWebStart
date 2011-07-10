@@ -122,7 +122,7 @@ if ($action == 'update') { // Call by Ajax -> ./js/jquery.edit.js
 	<link rel="image_src" href="<?=$WWW;?>images/preview.png"/>
 	<link rel="apple-touch-icon" href="<?=$WWW;?>images/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?=$WWW;?>css/styles.css" id="themeDefault"/>
-	<link rel="search" type="application/opensearchdescription+xml" title="Google Anonymous Search" href="http://home.b2bweb.fr/google_b2bweb.xml">
+	<link rel="search" type="application/opensearchdescription+xml" title="Google Anonymous Search" href="<?=$WWW;?>google_b2bweb.xml">
 	<!-- Script loaded in header : nothing print without them // Ok some poor text for poor bots indexing -->
 	<script type="text/javascript" src="<?=$WWW;?>js/jquery.min.plus.js"></script>
 	<script type="text/javascript" src="<?=$WWW;?>js/<?=(!empty($_SESSION['user']['SITES']) ? 'sitesDatas.js.php' : 'sitesDatas.js');?>"></script>

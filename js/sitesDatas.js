@@ -13,8 +13,8 @@ var SITES = [
 {href:'http://www.google.com/calendar', result:'', tips:'L\'agenda en ligne de Google', title:'<strong>Agenda</strong>'},
 {href:'http://www.google.com/contacts', result:'', tips:'Vos contacts googles (Gmail, Docs, ...)', title:'Contacts'},
 {href:'http://mail.google.com/mail', result:'https://mail.google.com/mail/?#search/{R}', tips:'Gmail: Email by Google', title:'<strong>Gmail</strong>'},
-{href:'http://www.google.com/profiles?q=', result:'http://www.google.com/profiles?q={R}', tips:'Administrer votre profil google', title:'ProfileBuzz'},
-{href:'http://wave.google.com', result:'https://wave.google.com/wave/#restored:result:{R}', tips:'Communicate and collaborate in real time', title:'Wave'}
+{href:'http://www.google.com/profiles?q=', result:'http://www.google.com/profiles?q={R}', tips:'Administrer votre profil google', title:'Profiles'},
+{href:'https://plus.google.com/', result:'http://www.google.com/search?q={R}&tbs=prfl:e&authuser=0', tips:'The Google+ project: real life sharing', title:'Google+<span>New</span>'}
 ]}, {title: 'CARTES', data : [
 {href:'http://www.google.com/adresses', result:'', tips:'Administrez vos adresses sur google maps', title:'Adresses'},
 {href:'http://maps.google.fr', result:'http://maps.google.fr/maps?hl=fr&amp;q={R}', tips:'Affichez des plans et calculez des itinéraires routiers', title:'<strong>Maps</strong>'},
@@ -27,7 +27,8 @@ var SITES = [
 {href:'http://www.google.fr/reader', result:'http://www.google.com/reader/view/?tab=Cy#search/{R}', tips:'Lecteur de flux RSS pour suivre l\'actu de vos sites préférés', title:'<strong>Reader</strong>'},
 {href:'http://www.youtube.com', result:'http://www.youtube.com/results?hl=fr&amp;q={R}', tips:'Broadcast Yourself.', title:'<strong>YouTube</strong>'},
 {href:'http://www.youtube.com/disco', result:'', tips:'Youtube Music Discovery Project (Disco)', title:'YouTubeMix'},
-{href:'http://www.youtube.com/leanback', result:'', tips:'Google TV Beta Interface with Youtube videos', title:'LeanBack'}
+{href:'http://www.youtube.com/leanback', result:'', tips:'Google TV Beta Interface with Youtube videos', title:'LeanBack'},
+{href:'http://music.google.com', result:'http://music.google.com/music/listen#SEARCH%20RESULTS_{R}', tips:'Google Music Beta Cloud Service', title:'Music<span>New</span>'}
 ]}, {title: 'ACTUS', data : [
 {href:'http://news.google.fr', result:'http://news.google.fr/news?hl=fr&amp;q={R}', tips:' Offre une compilation d\'articles publiés par un grand nombre de sources', title:'<strong>Actualités</strong>'},
 {href:'http://fastflip.googlelabs.com', result:'http://fastflip.googlelabs.com/?hl=fr&amp;q={R}', tips:'Feuilletez rapidement l\'actualité', title:'FastFlip'},
@@ -49,11 +50,12 @@ var SITES = [
 {href:'http://books.google.fr', result:'http://books.google.fr/books?hl=fr&amp;q={R}', tips:'Recherche spécifique dans les livres', title:'Livres'},
 {href:'http://www.google.com/prdhp', result:'http://www.google.com/products?q={R}', tips:'Recherche de produits', title:'Produits'},
 {href:'http://scholar.google.com', result:'http://scholar.google.fr/scholar?hl=fr&amp;q={R}', tips:'Recherche étendue sur des travaux universitaires', title:'Scholar'}
-]}, {title: 'SITES', data : [
+]}, {title: 'OUTILS', data : [
 {href:'https://www.google.com/adsense', result:'', tips:'Monétisation de site', title:'Adsense'},
 {href:'https://www.google.com/analytics', result:'', tips:'Analyse d\'audience Internet', title:'Analytics'},
 {href:'http://www.blogger.com', result:'', tips:'Outil de publication de blogs', title:'Blogger'},
 {href:'https://www.google.com/dashboard/?pli=1', result:'', tips:'Summary of the data stored with a Google account', title:'Dashboard'},
+{href:'http://www.googlelabs.com', result:'http://www.googlelabs.com/?q={R}', tips:'Play around with prototypes of some of Google\'s wild and crazy ideas', title:'Labs'},
 {href:'http://www.google.fr/trends', result:'http://www.google.fr/trends?q={R}', tips:'Mesurer l\'intensité des requêtes sur un mot', title:'Marques'},
 {href:'http://sites.google.com', result:'', tips:'Outil de création de site', title:'Sites'}
 ]}, {title: 'RECHERCHE', data : [
@@ -146,8 +148,9 @@ var SITES = [
 {href:'http://newsmap.jp/#/b,e,m,n,s,t,w/fr/view', result:'http://newsmap.jp/#/b,e,m,n,s,t,w/fr/search/all/{R}/', tips:'Reflects the constantly changing landscape of the GoogleNews aggregator', title:'<strong>NewsMap</strong>'},
 {href:'http://www.nouvelobs.com', result:'http://recherche.nouvelobs.com/?q={R}', tips:'Actualité politique, sociale ou internationale', title:'NouvelObs'},
 {href:'http://www.france-ouest.com', result:'', tips:'Journal d\'Ouest France', title:'OuestFrance'},
+{href:'http://owni.fr', result:'', tips:'News, Augmented : Société, pouvoirs et cultures numériques', title:'<strong>Owni</strong><span>New</span>'},
 {href:'http://www.rue89.com', result:'', tips:'Site d\'information et de débat sur l\'actualité, indépendant et participatif', title:'<strong>Rue89</strong>'},
-{href:'http://www.slate.fr', result:'http://www.slate.fr/search/node/{R}', tips:'Slate Magazine', title:'Slate'}
+{href:'http://www.slate.fr', result:'http://www.slate.fr/search/node/{R}', tips:'Slate Magazine', title:'Slate<span>New</span>'}
 ]}, {title: 'PORTAILS', data : [
 {href:'http://www.amazon.fr', result:'http://www.amazon.fr/s/ref=nb_ss?&amp;url=search-alias%3Daps&amp;field-keywords={R}', tips:'Achat et vente en ligne', title:'Amazon'},
 {href:'http://del.icio.us', result:'http://delicious.com/search?p={R}', tips:'The world\'s leading social bookmarking service', title:'Del.icio.us'},
